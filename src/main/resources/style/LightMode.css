@@ -1,0 +1,102 @@
+*{
+    -clr-teal-100:#e6fffa;
+    -clr-teal-200:#b2f5ea;
+    -clr-teal-300:#81e6d9;
+    -clr-teal-400:#4fd1c5;
+    -clr-teal-500:#38b2ac;
+    -clr-teal-600:#319795;
+    -clr-teal-700:#2c7a7b;
+    -clr-teal-800:#285e61;
+    -clr-teal-900:#234e52;
+
+    -clr-base:#eff1f7;
+    -clr-container:#ffffff;
+    -clr-focused:#f7f9fb;
+
+    -clr-txt-header:#264d60;
+    -clr-txt-normal:#79808e;
+    -clr-txt-hint:#bec4cb;
+
+    -clr-danger:#eb7474;
+}
+
+.rootPane{
+    -fx-background-color:-clr-base;
+}
+
+.container{
+    -fx-background-color:-clr-container;
+    -fx-border-radius:25;
+    -fx-background-radius:25;
+}
+
+TextField{
+    -fx-background-color:-clr-container;
+    -fx-border-color:-clr-txt-hint;
+    -fx-border-radius:10px;
+    -fx-prompt-text-fill:-clr-txt-hint;
+    -fx-text-fill:-clr-txt-normal;
+    -fx-font-family:"Segoe UI";
+    -fx-font-size:16px;
+}
+
+TextField:focused{
+    -fx-border-color:-clr-teal-500;
+    -fx-border-width:1px;
+}
+
+PasswordField{
+    -fx-background-color:-clr-container;
+    -fx-border-color:-clr-txt-hint;
+    -fx-border-radius:10px;
+    -fx-prompt-text-fill:-clr-txt-hint;
+    -fx-text-fill:-clr-txt-normal;
+    -fx-font-family:"Segoe UI";
+    -fx-font-size:16px;
+}
+
+PasswordField:focused{
+    -fx-border-color:-clr-teal-500;
+    -fx-border-width:1px;
+}
+
+.inputLabel{
+    -fx-font-family:"Segoe UI";
+    -fx-font-size:16px;
+    -fx-text-fill:-clr-txt-normal;
+}
+
+Button{
+    -fx-background-radius:10px;
+    -fx-border-radius:10px;
+    -fx-font-family:"Segoe UI Semibold";
+    -fx-font-size:20px;
+}
+
+Button:hover{
+    -fx-opacity:0.9;
+}
+
+.buttonImportantFilled{
+    -fx-background-color:-clr-teal-500;
+    -fx-text-fill:-clr-container;
+}
+
+.buttonImportantOutlined{
+    -fx-border-color:-clr-teal-500;
+    -fx-border-width:2px;
+    -fx-background-color:-clr-container;
+    -fx-text-fill:-clr-teal-500;
+}
+
+.buttonDangerFilled{
+    -fx-background-color:-clr-danger;
+    -fx-text-fill:-clr-container;
+}
+
+.buttonDangerOutlined{
+    -fx-border-color:-clr-danger;
+    -fx-border-width:2px;
+    -fx-background-color:-clr-container;
+    -fx-text-fill:-clr-danger;
+}

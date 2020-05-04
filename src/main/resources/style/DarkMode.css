@@ -1,0 +1,19 @@
+*{
+    -clr-teal-100:#e6fffa;
+    -clr-teal-200:#b2f5ea;
+    -clr-teal-300:#81e6d9;
+    -clr-teal-400:#4fd1c5;
+    -clr-teal-500:#38b2ac;
+    -clr-teal-600:#319795;
+    -clr-teal-700:#2c7a7b;
+    -clr-teal-800:#285e61;
+    -clr-teal-900:#234e52;
+
+    -clr-base:#3c4556;
+    -clr-container:#343b4a;
+    -clr-focused:#f7f9fb;
+
+    -clr-txt-header:#ececec;
+    -clr-txt-normal:#d5d5d5;
+    -clr-txt-hint:#60697d;
+}

@@ -66,6 +66,23 @@ PasswordField:focused{
     -fx-text-fill:-clr-txt-normal;
 }
 
+.errorLabel{
+    -fx-font-size:10px;
+    -fx-font-style:italic;
+    -fx-text-fill:-clr-danger;
+}
+
+.jfx-button{
+    -fx-background-radius:10px;
+    -fx-border-radius:10px;
+    -fx-font-family:"Segoe UI Semibold";
+    -fx-font-size:20px;
+}
+
+.jfx-button:hover{
+    -fx-opacity:0.9;
+}
+
 Button{
     -fx-background-radius:10px;
     -fx-border-radius:10px;

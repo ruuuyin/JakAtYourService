@@ -72,6 +72,12 @@ PasswordField:focused{
     -fx-text-fill:-clr-danger;
 }
 
+.headerLabel{
+    -fx-font-size:16px;
+    -fx-font-family:"Segoe UI Bold";
+    -fx-text-fill:-clr-txt-header;
+}
+
 .jfx-button{
     -fx-background-radius:10px;
     -fx-border-radius:10px;
@@ -116,4 +122,63 @@ Button:hover{
     -fx-border-width:2px;
     -fx-background-color:-clr-container;
     -fx-text-fill:-clr-danger;
+}
+
+
+
+
+
+
+
+/*UI Special Style*/
+.barContainer{
+    -fx-background-color:-clr-container;
+}
+.navButton{
+    -fx-font-size:12px;
+    -fx-font-family:"Segoe UI Bold";
+    -fx-border-radius:0px !important;
+    -fx-background-radius:0px !important;
+    -fx-border-color:-clr-teal-500;
+    -fx-text-fill:-clr-teal-500;
+    -fx-border-width:2px 1px;
+}
+
+#navStart{
+    -fx-border-width:2px 1px 2px 2px;
+    -fx-border-radius:10px 0 0px 10px !important;
+    -fx-background-radius:10px 0 0px 10px !important;
+}
+
+#navEnd{
+    -fx-border-width:2px 2px 2px 1px;
+    -fx-border-radius:0px 10 10px 0px !important;
+    -fx-background-radius:0px 10px 10px 0px !important;
+}
+
+.navButton:hover{
+    -fx-background-color:-clr-teal-100 !important;
+}
+
+.navActive{
+    -fx-font-size:12px;
+    -fx-font-family:"Segoe UI Bold";
+    -fx-border-radius:0px !important;
+    -fx-background-radius:0px !important;
+    -fx-background-color:-clr-teal-500;
+    -fx-text-fill:-clr-container;
+    -fx-border-width:2px 1px;
+}
+
+.navActive:hover{
+    -fx-background-color:-clr-teal-600 !important;
+}
+
+
+#avatar{
+    -fx-border-radius:50px;
+    -fx-background-radius:50px;
+    -fx-border-width:2px;
+    -fx-border-color:-clr-teal-500;
+
 }

@@ -43,9 +43,6 @@
                                  </VBox.margin>
                               </HBox>
                               <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter your username here">
-                                 <padding>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </padding>
                                  <font>
                                     <Font name="Segoe UI" size="16.0" />
                                  </font>
@@ -70,9 +67,6 @@
                                  </VBox.margin>
                               </HBox>
                               <PasswordField promptText="Enter your password here">
-                                 <padding>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </padding>
                                  <VBox.margin>
                                     <Insets top="5.0" />
                                  </VBox.margin>

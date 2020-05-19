@@ -34,30 +34,86 @@ TextField{
     -fx-background-color:-clr-container;
     -fx-border-color:-clr-txt-hint;
     -fx-border-radius:10px;
+    -fx-background-radius:10px;
     -fx-prompt-text-fill:-clr-txt-hint;
     -fx-text-fill:-clr-txt-normal;
     -fx-font-family:"Segoe UI";
     -fx-font-size:16px;
+    -fx-padding:15px;
 }
 
-TextField:focused{
-    -fx-border-color:-clr-teal-500;
-    -fx-border-width:1px;
-}
 
 PasswordField{
     -fx-background-color:-clr-container;
     -fx-border-color:-clr-txt-hint;
     -fx-border-radius:10px;
+    -fx-background-radius:10px;
     -fx-prompt-text-fill:-clr-txt-hint;
     -fx-text-fill:-clr-txt-normal;
     -fx-font-family:"Segoe UI";
     -fx-font-size:16px;
+    -fx-padding:15px;
 }
 
-PasswordField:focused{
-    -fx-border-color:-clr-teal-500;
-    -fx-border-width:1px;
+
+.combo-box{
+    -fx-border-color:-clr-txt-hint;
+    -fx-border-style:solid;
+    -fx-border-width:1;
+    -fx-border-radius:10px;
+    -fx-background-radius:10px;
+    -fx-background-color:-clr-container;
+}
+.combo-box .arrow{
+    -fx-background-color:-clr-txt-hint;
+}
+
+.combo-box .arrow-button{
+    -fx-background-color:-clr-container;
+    -fx-border-radius:10px;
+    -fx-background-radius:10px;
+    -fx-padding:15px;
+}
+
+.combo-box .list-cell{
+    -fx-font-family:"Segoe UI";
+    -fx-font-size:16px;
+    -fx-padding:15px;
+    -fx-text-fill:-clr-txt-normal;
+    -fx-background-color:-clr-container;
+}
+
+.combo-box .list-cell:hover{
+    -fx-background-color:-clr-focused;
+    -fx-border-radius:10px;
+    -fx-background-radius:10px;
+}
+
+.combo-box .list-cell:focused{
+    -fx-background-color:-clr-container;
+    -fx-border-radius:10px;
+    -fx-background-radius:10px;
+}
+
+.combo-box .list-view{
+    -fx-background-color:-clr-container;
+}
+
+ComboBox:focused,PasswordField:focused,TextField:focused{
+    -fx-border-color:-clr-teal-500 !important;
+    -fx-border-width:1px !important;
+}
+
+.scroll-bar{
+    -fx-background-color:-clr-container;
+}
+
+.scroll-bar .track-background{
+    -fx-background-color:-clr-container;
+}
+
+.scroll-bar .thumb,.scroll-bar .increment-arrow,.scroll-bar .decrement-arrow{
+    -fx-background-color:-clr-teal-500;
 }
 
 .inputLabel{
@@ -75,6 +131,7 @@ PasswordField:focused{
 .headerLabel{
     -fx-font-size:16px;
     -fx-font-family:"Segoe UI Bold";
+    -fx-font-style:bold;
     -fx-text-fill:-clr-txt-header;
 }
 
@@ -181,4 +238,25 @@ Button:hover{
     -fx-border-width:2px;
     -fx-border-color:-clr-teal-500;
 
+}
+
+.headerContainer{
+    -fx-border-radius:25;
+    -fx-background-radius:25;
+}
+
+.headerButton{
+    -fx-background-color:-clr-teal-500;
+    -fx-border-radius:25;
+    -fx-background-radius:25;
+    -fx-font-size:16px;
+    -fx-font-family:"Segoe UI Bold";
+    -fx-font-style:bold;
+    -fx-text-fill:-clr-container;
+    -fx-pref-width:40px;
+    -fx-pref-heigth:40px;
+    -fx-min-width:40px;
+    -fx-min-heigth:40px;
+    -fx-max-width:40px;
+    -fx-max-heigth:40px;
 }

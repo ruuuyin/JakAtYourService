@@ -415,3 +415,18 @@ Button:hover{
 }
 
 
+.scroll-pane{
+    -fx-background-color:transparent;
+    -fx-border-radius: 25 25 25 25;
+}
+
+.chipViewContaier{
+    -fx-background-color:-clr-container;
+    -fx-border:none;
+}
+
+.chipViewContaier:pannable .corner,.chipViewContaier:pannable .viewport{
+    -fx-background-color:transparent;
+    -fx-border-radius: 0 0 25 25;
+    -fx-border:none;
+}

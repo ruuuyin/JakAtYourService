@@ -4,6 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -22,6 +24,20 @@
                <effect>
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
+               <children>
+                  <TableView prefHeight="545.0" prefWidth="890.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="SERVICE NAME" />
+                      <TableColumn minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="CATEGORY" />
+                        <TableColumn maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" styleClass="center-cell-item" text="PRICE" />
+                        <TableColumn maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" styleClass="center-cell-item" text="PROFIT" />
+                        <TableColumn maxWidth="210.0" minWidth="210.0" prefWidth="210.0" resizable="false" styleClass="center-cell-item" text="ACTION" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
             </AnchorPane>
             <VBox layoutX="968.0" layoutY="133.0" prefHeight="454.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
                <effect>

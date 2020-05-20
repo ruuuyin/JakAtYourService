@@ -14,34 +14,33 @@ public class SceneRouter {
     private Parent root;
     private Scene scene;
 
-
-    private Parent getFxml(String fxmlName){
+    private Parent getFxml(String fxmlName) {
         try {
-            return FXMLLoader.load(getClass().getResource("fxml/"+fxmlName+".fxml"));
+            return FXMLLoader.load(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Stage getStage(Pane rootPane){
+    public Stage getStage(Pane rootPane) {
         return (Stage) rootPane.getScene().getWindow();
     }
 
-    public Stage getStage(){
+    public Stage getStage() {
         return stage;
     }
 
-    public void clearChildNode(Pane parent){
+    public void clearChildNode(Pane parent) {
         if (parent.getChildren().size() > 0)
             parent.getChildren().clear();
     }
 
-    public void closeStage(Pane rootPane){
+    public void closeStage(Pane rootPane) {
         getStage(rootPane).close();
     }
 
-    public SceneRouter openStage(String fxmlName,String title){
+    public SceneRouter openStage(String fxmlName, String title) {
         root = getFxml(fxmlName);
         scene = new Scene(root);
 
@@ -52,7 +51,7 @@ public class SceneRouter {
         return this;
     }
 
-    public SceneRouter changeStage(Pane rootPane, String fxmlName,String title){
+    public SceneRouter changeStage(Pane rootPane, String fxmlName, String title) {
         root = getFxml(fxmlName);
         scene = new Scene(root);
 
@@ -65,32 +64,29 @@ public class SceneRouter {
         return this;
     }
 
-    public SceneRouter attachNode(AnchorPane parent,String fxmlName){
+    public SceneRouter attachNode(AnchorPane parent, String fxmlName) {
         root = getFxml(fxmlName);
-        stage = getStage(parent);
 
-        AnchorPane.setBottomAnchor(root,0.0);
-        AnchorPane.setTopAnchor(root,0.0);
-        AnchorPane.setRightAnchor(root,0.0);
-        AnchorPane.setLeftAnchor(root,0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
 
         clearChildNode(parent);
         parent.getChildren().addAll(root);
         return this;
     }
 
-    public void changeScene(Pane rootPane,String fxmlName,String title){
+    public void changeScene(Pane rootPane, String fxmlName, String title) {
         root = getFxml(fxmlName);
         stage = getStage(rootPane);
         stage.setTitle(title);
 
-        boolean fullScreenFlag = stage.isFullScreen(),
-                maximizeFlag = stage.isMaximized();
+        boolean fullScreenFlag = stage.isFullScreen(), maximizeFlag = stage.isMaximized();
 
-        double ww = stage.getScene().getWidth(),
-               hh = stage.getScene().getHeight();
+        double ww = stage.getScene().getWidth(), hh = stage.getScene().getHeight();
 
-        scene = new Scene(root,ww,hh);
+        scene = new Scene(root, ww, hh);
         stage.setScene(scene);
 
         stage.setMaximized(maximizeFlag);

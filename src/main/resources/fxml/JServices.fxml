@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -63,6 +64,131 @@
                            </HBox.margin></JFXButton>
                      </children>
                   </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Name" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter Service Name Here">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="53.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Category" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <ComboBox prefHeight="51.0" prefWidth="386.0" promptText="Select Categories">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="133.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Price" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter Service Price">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="213.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Profit" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter Profit ">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <StackPane>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <JFXButton prefHeight="44.0" prefWidth="420.0" text="ACTIVATE" visible="false">
+                           <styleClass>
+                              <String fx:value="buttonImportantFilled" />
+                              <String fx:value="buttonTextSecondary" />
+                           </styleClass>
+                        </JFXButton>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton prefHeight="44.0" prefWidth="420.0" text="ACTIVATE">
+                                 <styleClass>
+                                    <String fx:value="buttonNormal" />
+                                    <String fx:value="buttonTextSecondary" />
+                                 </styleClass>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="44.0" prefWidth="420.0" text="ACTIVATE">
+                                 <styleClass>
+                                    <String fx:value="buttonImportantFilled" />
+                                    <String fx:value="buttonTextSecondary" />
+                                 </styleClass>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
                </children>
             </VBox>
             <VBox layoutX="969.0" layoutY="58.0" prefHeight="169.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="523.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">

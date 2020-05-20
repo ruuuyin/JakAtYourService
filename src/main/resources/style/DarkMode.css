@@ -210,7 +210,7 @@ Button:hover{
 .buttonImportantOutlined{
     -fx-border-color:-clr-teal-500;
     -fx-border-width:2px;
-    -fx-background-color:-clr-container;
+    -fx-background-color:transparent;
     -fx-text-fill:-clr-teal-500;
 }
 
@@ -222,12 +222,38 @@ Button:hover{
 .buttonDangerOutlined{
     -fx-border-color:-clr-danger;
     -fx-border-width:2px;
-    -fx-background-color:-clr-container;
+    -fx-background-color:transparent;
     -fx-text-fill:-clr-danger;
+}
+
+.buttonNormal{
+    -fx-border-color:-clr-txt-normal;
+    -fx-border-width:2px;
+    -fx-background-color:transparent;
+    -fx-text-fill:-clr-txt-normal;
 }
 
 
 
+.buttonTextPrimary{
+    -fx-font-size:20px !important;
+    -fx-font-family:"Segoe UI Semibold";
+}
+
+.buttonTextSecondary{
+    -fx-font-family:"Segoe UI Semibold";
+    -fx-font-size:16px !important;
+}
+
+.buttonTextTertiary{
+    -fx-font-family:"Segoe UI Semibold";
+    -fx-font-size:14px !important;
+}
+
+.buttonTextLast{
+    -fx-font-family:"Segoe UI Semibold" ;
+    -fx-font-size:12px !important;
+}
 
 
 
@@ -358,6 +384,7 @@ Button:hover{
 .table-view .table-row-cell .table-cell{
     -fx-text-fill:-clr-txt-normal;
     -fx-border:none;
+    -fx-padding:15px;
 }
 
 .table-view .table-row-cell{
@@ -365,7 +392,6 @@ Button:hover{
     -fx-background-color:-clr-container;
     -fx-border:none;
     -fx-table-cell-border-color: transparent;
-    
 }
 
 
@@ -385,5 +411,3 @@ Button:hover{
 .table-view:row-selection:constrained-resize .placeholder .label{
     -fx-text-fill:-clr-txt-hint;
 }
-
-

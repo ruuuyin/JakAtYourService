@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1432.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JServices">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutX="56.0" layoutY="119.0" prefHeight="573.0" prefWidth="890.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="119.0">
+               <effect>
+                  <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
+               </effect>
+               <children>
+                  <TableView prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="SERVICE NAME" />
+                      <TableColumn minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="CATEGORY" />
+                        <TableColumn maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" styleClass="center-cell-item" text="PRICE" />
+                        <TableColumn maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" styleClass="center-cell-item" text="PROFIT" />
+                        <TableColumn maxWidth="210.0" minWidth="210.0" prefWidth="210.0" resizable="false" styleClass="center-cell-item" text="ACTION" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <VBox layoutX="968.0" layoutY="133.0" prefHeight="454.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+               <effect>
+                  <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
+               </effect>
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="423.0" styleClass="headerContainer">
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="370.0" styleClass="headerLabel" text="MANAGE SERVICES" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXButton minWidth="28.0" prefHeight="35.0" prefWidth="28.0" styleClass="headerButton" text="+">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></JFXButton>
+                     </children>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Name" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter Service Name Here">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="53.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Category" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <ComboBox prefHeight="51.0" prefWidth="386.0" promptText="Select Categories">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="133.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Price" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter Service Price">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="213.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Service Profit" HBox.hgrow="ALWAYS" />
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter Profit ">
+                           <font>
+                              <Font name="Segoe UI" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <StackPane>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton prefHeight="44.0" prefWidth="420.0" text="Cancel">
+                                 <styleClass>
+                                    <String fx:value="buttonNormal" />
+                                    <String fx:value="buttonTextSecondary" />
+                                 </styleClass>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="44.0" prefWidth="420.0" text="Save">
+                                 <styleClass>
+                                    <String fx:value="buttonImportantFilled" />
+                                    <String fx:value="buttonTextSecondary" />
+                                 </styleClass>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+               </children>
+            </VBox>
+            <VBox layoutX="969.0" layoutY="58.0" prefHeight="169.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="523.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+               <effect>
+                  <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
+               </effect>
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="423.0" styleClass="headerContainer">
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="370.0" styleClass="headerLabel" text="MANAGE CATEGORIES">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXButton minWidth="28.0" prefHeight="35.0" prefWidth="28.0" styleClass="headerButton" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <ScrollPane pannable="true" prefHeight="102.0" prefWidth="423.0" styleClass="chipViewContaier" VBox.vgrow="ALWAYS">
+                    <content>
+                      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="386.0" styleClass="chipViewContaier">
+                           <children>
+                              <FlowPane layoutX="86.0" layoutY="-53.0" prefHeight="200.0" prefWidth="200.0" styleClass="chipViewContaier" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="15.0" right="2.0" />
+                     </VBox.margin>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <TextField layoutX="40.0" layoutY="40.0" prefHeight="38.0" prefWidth="458.0" promptText="Search" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
+            <JFXButton ellipsisString="" layoutX="515.0" layoutY="42.0" prefHeight="38.0" prefWidth="64.0" styleClass="buttonImportantFilled">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../img/icons/light/container/j-search.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <ComboBox layoutX="639.0" layoutY="38.0" prefHeight="51.0" prefWidth="290.0" promptText="Filter By Categories" AnchorPane.rightAnchor="503.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

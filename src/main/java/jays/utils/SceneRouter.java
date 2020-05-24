@@ -80,13 +80,11 @@ public class SceneRouter {
         stage = getStage(rootPane);
         stage.setTitle(title);
 
-        boolean fullScreenFlag = stage.isFullScreen(),
-                maximizeFlag = stage.isMaximized();
+        boolean fullScreenFlag = stage.isFullScreen(), maximizeFlag = stage.isMaximized();
 
-        double ww = stage.getScene().getWidth(),
-               hh = stage.getScene().getHeight();
+        double ww = stage.getScene().getWidth(), hh = stage.getScene().getHeight();
 
-        scene = new Scene(root,ww,hh);
+        scene = new Scene(root, ww, hh);
         stage.setScene(scene);
 
         stage.setMaximized(maximizeFlag);

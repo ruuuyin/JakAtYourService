@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1432.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JMain">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="265.0" layoutY="39.0" maxHeight="66.0" minHeight="66.0" prefHeight="66.0" prefWidth="1432.0" styleClass="barContainer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <image>
+                              <Image url="@../img/j-logo-1.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="66.0" prefWidth="590.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <JFXButton id="navStart" prefHeight="32.0" prefWidth="110.0" styleClass="navButton" text="Transaction">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton prefHeight="32.0" prefWidth="110.0" styleClass="navButton" text="Services">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton prefHeight="32.0" prefWidth="110.0" styleClass="navButton" text="Customer">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton prefHeight="32.0" prefWidth="110.0" styleClass="navButton" text="Record">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton id="navEnd" prefHeight="32.0" prefWidth="110.0" styleClass="navButton" text="Settings">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" maxHeight="66.0" minHeight="66.0" prefHeight="66.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="230.0" styleClass="headerLabel" text="\@Username" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <HBox id="avatar" maxHeight="48.0" maxWidth="48.0" prefHeight="48.0" prefWidth="48.0">
+                           <children>
+                              <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/6.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="58.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../img/icons/light/hint/j-menu.png" />
+                           </image>
+                        </ImageView>
+                     </children></HBox>
+               </children>
+            </HBox>
+            <AnchorPane fx:id="subSceneContainer" layoutX="626.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="66.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

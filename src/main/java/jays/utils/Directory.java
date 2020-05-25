@@ -8,7 +8,7 @@ public class Directory {
     public static final String MISC = "/misc/";
 
     public static final String AVATARS=IMG+"avatars/";
-    public static final String ICONS=IMG+"avatars/";
+    public static final String ICONS=IMG+"icons/";
 
     public static final String DARK=ICONS+"dark/";
     public static final String LIGHT=ICONS+"light/";

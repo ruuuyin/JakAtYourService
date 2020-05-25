@@ -445,3 +445,9 @@ Button:hover{
     -fx-background-color:-clr-focused;
     -fx-text-fill:-clr-txt-normal;
 }
+
+.jfx-dialog-overlay-pane > StackPane{
+    -fx-background-color:-clr-container;
+    -fx-background-radius:10px;
+    -fx-border-radius:10px;
+}

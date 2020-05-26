@@ -132,7 +132,7 @@ ComboBox:focused,PasswordField:focused,TextField:focused{
 
 .scroll-bar .increment-arrow,.scroll-bar .decrement-arrow{
     visibility: hidden;
-    -fx-shape: " ";	
+    -fx-shape: " ";
     -fx-padding:0;
 }
 
@@ -141,12 +141,12 @@ ComboBox:focused,PasswordField:focused,TextField:focused{
     -fx-background-color:transparent;
 }
 
- 
+
 .scroll-bar:horizontal .increment-button ,
 .scroll-bar:horizontal .decrement-button {
-   -fx-background-color:transparent;
-   -fx-background-radius: 0em;
-   -fx-padding:0 0 10 0;
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
 
 }
 
@@ -154,9 +154,9 @@ ComboBox:focused,PasswordField:focused,TextField:focused{
 .scroll-bar:vertical .increment-button ,
 .scroll-bar:vertical .decrement-button {
 
-   -fx-background-color:transparent;
-   -fx-background-radius: 0em;
-   -fx-padding:0 10 0 0;
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
 
 }
 
@@ -363,7 +363,6 @@ Button:hover{
 
 .table-view .column-header{
     -fx-border-width:1 0 1 0;
-    -fx-border-color:-posImportant;
 }
 
 .table-view .column-header .label{

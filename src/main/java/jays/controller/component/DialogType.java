@@ -4,5 +4,5 @@ public enum DialogType {
     INFORM,
     CONFIRM,
     ERROR,
-    SUCCESS
+    PLANE, SUCCESS
 }

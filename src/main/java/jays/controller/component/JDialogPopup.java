@@ -98,7 +98,7 @@ public class JDialogPopup {
         Label ttl = new Label(title);
         ttl.getStyleClass().add("headerLabel");
 
-        ImageView iv = new ImageView(new Image(getImageByType(dialogType)));
+        ImageView iv = new ImageView(getImageByType(dialogType)==null?null:new Image(getImageByType(dialogType)));
         iv.setFitHeight(30);
         iv.setFitWidth(30);
         HBox.setMargin(iv,new Insets(0,5,0,0));

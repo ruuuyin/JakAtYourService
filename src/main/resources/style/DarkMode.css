@@ -16,6 +16,8 @@
     -clr-txt-header:#ececec;
     -clr-txt-normal:#d5d5d5;
     -clr-txt-hint:#60697d;
+
+    -clr-danger:#eb7474;
 }
 
 .rootPane{
@@ -324,7 +326,6 @@ Button:hover{
     -fx-background-radius:25;
     -fx-font-size:16px;
     -fx-font-family:"Segoe UI Bold";
-    -fx-font-style:bold;
     -fx-text-fill:-clr-container;
     -fx-pref-width:40px;
     -fx-pref-heigth:40px;
@@ -362,7 +363,6 @@ Button:hover{
 
 .table-view .column-header{
     -fx-border-width:1 0 1 0;
-    -fx-border-color:-posImportant;
 }
 
 .table-view .column-header .label{

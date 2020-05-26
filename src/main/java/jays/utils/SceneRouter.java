@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import jays.App;
 
 import java.io.IOException;
 
@@ -43,6 +44,7 @@ public class SceneRouter {
 
         stage = new Stage();
         stage.setScene(scene);
+        stage.getScene().getStylesheets().add(App.styleSheet());
         stage.setTitle(title);
         stage.show();
         return stage;
@@ -56,6 +58,7 @@ public class SceneRouter {
 
         stage = new Stage();
         stage.setScene(scene);
+        stage.getScene().getStylesheets().add(App.styleSheet());
         stage.setTitle(title);
         stage.show();
         return stage;
@@ -86,10 +89,12 @@ public class SceneRouter {
 
         scene = new Scene(root, ww, hh);
         stage.setScene(scene);
-
+        stage.getScene().getStylesheets().add(App.styleSheet());
         stage.setMaximized(maximizeFlag);
         stage.setFullScreen(fullScreenFlag);
         stage.setFullScreenExitHint("");
         return root;
     }
+
+
 }

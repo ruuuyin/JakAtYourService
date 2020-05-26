@@ -9,6 +9,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,81 +17,86 @@
 
 <StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1432.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JLogin">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <AnchorPane>
          <children>
-            <VBox alignment="CENTER" prefHeight="766.0" prefWidth="486.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="578.0" prefWidth="486.0" styleClass="container">
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#00000033" height="8.08" radius="5.8475" width="17.31" />
-                     </effect>
+                  <VBox alignment="CENTER" prefHeight="766.0" prefWidth="486.0">
                      <children>
-                        <ImageView fitHeight="99.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/j-logo-2.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin></ImageView>
-                        <VBox fx:id="igUsername">
+                        <VBox alignment="CENTER" prefHeight="578.0" prefWidth="486.0" styleClass="container">
+                           <effect>
+                              <DropShadow blurType="GAUSSIAN" color="#00000033" height="8.08" radius="5.8475" width="17.31" />
+                           </effect>
                            <children>
-                              <HBox alignment="CENTER">
+                              <ImageView fitHeight="99.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/j-logo-2.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <VBox fx:id="igUsername">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Username" HBox.hgrow="ALWAYS" />
-                                    <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Username" HBox.hgrow="ALWAYS" />
+                                          <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter your username here">
+                                       <font>
+                                          <Font name="Segoe UI" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </TextField>
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets left="60.0" right="60.0" top="30.0" />
                                  </VBox.margin>
-                              </HBox>
-                              <TextField prefHeight="34.0" prefWidth="441.0" promptText="Enter your username here">
-                                 <font>
-                                    <Font name="Segoe UI" size="16.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </TextField>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="60.0" right="60.0" top="30.0" />
-                           </VBox.margin>
-                        </VBox>
-                        <VBox fx:id="igPassword">
-                           <children>
-                              <HBox alignment="CENTER">
+                              </VBox>
+                              <VBox fx:id="igPassword">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Password" HBox.hgrow="ALWAYS" />
-                                    <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="inputLabel" text="Password" HBox.hgrow="ALWAYS" />
+                                          <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="errorLabel" text="(Required)" visible="false" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <PasswordField promptText="Enter your password here">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </PasswordField>
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets left="60.0" right="60.0" top="30.0" />
                                  </VBox.margin>
-                              </HBox>
-                              <PasswordField promptText="Enter your password here">
+                              </VBox>
+                              <JFXButton fx:id="btnSignIn" onAction="#btnSignInOnAction" prefHeight="64.0" prefWidth="263.0" text="Sign In">
                                  <VBox.margin>
-                                    <Insets top="5.0" />
+                                    <Insets bottom="30.0" left="50.0" right="50.0" top="50.0" />
                                  </VBox.margin>
-                              </PasswordField>
+                                 <styleClass>
+                                    <String fx:value="buttonImportantFilled" />
+                                    <String fx:value="buttonTextPrimary" />
+                                 </styleClass>
+                              </JFXButton>
                            </children>
-                           <VBox.margin>
-                              <Insets left="60.0" right="60.0" top="30.0" />
-                           </VBox.margin>
                         </VBox>
-                        <JFXButton fx:id="btnSignIn" onAction="#btnSignInOnAction" prefHeight="64.0" prefWidth="263.0" text="Sign In">
-                           <VBox.margin>
-                              <Insets bottom="30.0" left="50.0" right="50.0" top="50.0" />
-                           </VBox.margin>
-                           <styleClass>
-                              <String fx:value="buttonImportantFilled" />
-                              <String fx:value="buttonTextPrimary" />
-                           </styleClass>
-                        </JFXButton>
                      </children>
                   </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
 </StackPane>

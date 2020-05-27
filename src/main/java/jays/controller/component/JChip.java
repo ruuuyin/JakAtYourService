@@ -49,7 +49,7 @@ public class JChip extends HBox {
         return button;
     }
 
-    public void setCloeOnAction(EventHandler<ActionEvent> event){
+    public void setCloseOnAction(EventHandler<ActionEvent> event){
         button.setOnAction(event);
     }
 

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1432.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JCustomer">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1432.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JCustomer">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -26,12 +26,12 @@
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
                <children>
-                  <TableView prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tvCustomer" prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="CUSTOMER NAME" />
-                        <TableColumn minWidth="200.0" prefWidth="308.8000030517578" styleClass="center-cell-item" text="CONTACT NUMBER" />
-                        <TableColumn minWidth="83.20001220703125" prefWidth="171.20001220703125" styleClass="center-cell-item" text="TOTAL RECORD" />
-                        <TableColumn maxWidth="210.0" minWidth="210.0" prefWidth="210.0" resizable="false" styleClass="center-cell-item" text="ACTION" />
+                        <TableColumn fx:id="colCustomer" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="CUSTOMER NAME" />
+                        <TableColumn fx:id="colContact" minWidth="200.0" prefWidth="308.8000030517578" styleClass="center-cell-item" text="CONTACT NUMBER" />
+                        <TableColumn fx:id="colTotalRecord" minWidth="83.20001220703125" prefWidth="171.20001220703125" styleClass="center-cell-item" text="TOTAL RECORD" />
+                        <TableColumn fx:id="colAction" maxWidth="210.0" minWidth="210.0" prefWidth="210.0" resizable="false" styleClass="center-cell-item" text="ACTION" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -57,14 +57,14 @@
                               <Font name="Segoe UI Bold" size="12.0" />
                            </font>
                         </Label>
-                        <JFXButton minWidth="28.0" prefHeight="35.0" prefWidth="28.0" styleClass="headerButton" text="+">
+                        <JFXButton fx:id="btnCustomerAdd" minWidth="28.0" onAction="#btnCustomerAddOnAction" prefHeight="35.0" prefWidth="28.0" styleClass="headerButton" text="+">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </JFXButton>
                      </children>
                   </HBox>
-                  <VBox>
+                  <VBox fx:id="igFirstName">
                      <children>
                         <HBox alignment="CENTER">
                            <children>
@@ -88,7 +88,7 @@
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="133.0">
+                  <VBox fx:id="igMiddleInitial" layoutX="10.0" layoutY="133.0">
                      <children>
                         <HBox alignment="CENTER">
                            <children>
@@ -112,7 +112,7 @@
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox>
+                  <VBox fx:id="igLastName">
                      <children>
                         <HBox alignment="CENTER">
                            <children>
@@ -136,7 +136,7 @@
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </VBox.margin>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="213.0">
+                  <VBox fx:id="igContactNum" layoutX="10.0" layoutY="213.0">
                      <children>
                         <HBox alignment="CENTER">
                            <children>
@@ -167,7 +167,7 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton prefHeight="44.0" prefWidth="420.0" text="Cancel">
+                              <JFXButton fx:id="mngCustomerCancel" onAction="#mngCustomerCancelOnAction" prefHeight="44.0" prefWidth="420.0" text="Cancel">
                                  <styleClass>
                                     <String fx:value="buttonNormal" />
                                     <String fx:value="buttonTextSecondary" />
@@ -176,7 +176,7 @@
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="44.0" prefWidth="420.0" text="Save">
+                              <JFXButton fx:id="mngCustomerSave" layoutX="10.0" layoutY="10.0" onAction="#mngCustomerSaveOnAction" prefHeight="44.0" prefWidth="420.0" text="Save">
                                  <styleClass>
                                     <String fx:value="buttonImportantFilled" />
                                     <String fx:value="buttonTextSecondary" />
@@ -203,7 +203,7 @@
                               <Font name="Segoe UI Bold" size="12.0" />
                            </font>
                         </Label>
-                        <JFXButton minWidth="28.0" prefHeight="35.0" prefWidth="28.0" styleClass="headerButton" text="+" />
+                        <JFXButton fx:id="btnTransactionHistory" minWidth="28.0" onAction="#btnTransactionHistoryOnAction" prefHeight="35.0" prefWidth="28.0" styleClass="headerButton" text="+" />
                      </children>
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" top="5.0" />
@@ -216,14 +216,14 @@
                   </ListView>
                </children>
             </VBox>
-            <TextField layoutX="40.0" layoutY="40.0" prefHeight="38.0" prefWidth="458.0" promptText="Search" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
+            <TextField fx:id="tfSearch" layoutX="40.0" layoutY="40.0" prefHeight="38.0" prefWidth="458.0" promptText="Search" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <JFXButton ellipsisString="" layoutX="515.0" layoutY="42.0" prefHeight="38.0" prefWidth="64.0" styleClass="buttonImportantFilled">
+            <JFXButton fx:id="btnSearch" ellipsisString="" layoutX="515.0" layoutY="42.0" onAction="#btnSearchOnAction" prefHeight="38.0" prefWidth="64.0" styleClass="buttonImportantFilled">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                  <ImageView fx:id="ivSearch" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@../img/icons/light/container/j-search.png" />
                      </image>

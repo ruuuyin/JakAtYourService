@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import jays.data.JsonWorker;
 import jays.data.entity.SystemInfo;
@@ -35,4 +36,15 @@ public class App extends Application {
                 : App.class.getResource(Directory.STYLE+"LightMode.css").toString();
     }
 
+    public static Image getImage(String imageName,boolean colorIsHint){
+        if (systemInfo().getTheme().equals("DarkMode") && colorIsHint)
+            return new Image(App.class.getResource(Directory.DARK_HINT+imageName+".png").toString());
+        else if (systemInfo().getTheme().equals("DarkMode") && !colorIsHint)
+            return new Image(App.class.getResource(Directory.DARK_CONTAINER+imageName+".png").toString());
+        else if (systemInfo().getTheme().equals("LightMode") && colorIsHint)
+            return new Image(App.class.getResource(Directory.LIGHT_HINT+imageName+".png").toString());
+        else if (systemInfo().getTheme().equals("LightMode") && !colorIsHint)
+            return new Image(App.class.getResource(Directory.LIGHT_CONTAINER+imageName+".png").toString());
+        else return null;
+    }
 }

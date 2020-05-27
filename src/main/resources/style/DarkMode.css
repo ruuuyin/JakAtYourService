@@ -451,3 +451,21 @@ Button:hover{
     -fx-background-radius:10px;
     -fx-border-radius:10px;
 }
+
+.chip{
+    -fx-background-color:-clr-teal-500;
+    -fx-background-radius:20px;
+}
+
+.chipLabel{
+    -fx-font-size:10px;
+}
+
+.chipClose{
+    -fx-background-color:-clr-teal-600;
+    -fx-font-size:10px;
+    -fx-background-radius:20px;
+}
+.chipClose:hover{
+    opacity:0.8;
+}

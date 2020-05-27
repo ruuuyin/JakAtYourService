@@ -16,62 +16,45 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import jays.App;
 import jays.controller.component.JChip;
+import jays.data.DatabaseHandler;
+import jays.utils.InputHandler;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class JServices implements Initializable {
 
     @FXML private StackPane rootPane;
-
     @FXML private AnchorPane tableContainer;
-
     @FXML private TableColumn<?, ?> colServiceName;
-
     @FXML private TableColumn<?, ?> colCategory;
-
     @FXML private TableColumn<?, ?> colPrice;
-
     @FXML private TableColumn<?, ?> colProfit;
-
     @FXML private TableColumn<?, ?> colAction;
-
     @FXML private VBox mngServices;
-
     @FXML private JFXButton btnAddService;
-
     @FXML private VBox igServiceName;
-
     @FXML private VBox igServiceCategory;
-
-    @FXML private ComboBox<?> cbCategorySelector;
-
+    @FXML private ComboBox<String> cbCategorySelector;
     @FXML private VBox igServicePrice;
-
     @FXML private VBox igServiceProfit;
-
     @FXML private JFXButton mngServiceCancel;
-
     @FXML private JFXButton mngServicesSaveBtn;
-
     @FXML private VBox mngCategories;
-
     @FXML private JFXButton btnCategoryAdd;
-
     @FXML private FlowPane fpCategoryContainer;
-
     @FXML private TextField tfSearch;
-
     @FXML private JFXButton btnSearch;
-
     @FXML private ImageView ivSearch;
-
-    @FXML private ComboBox<?> cbCategories;
+    @FXML private ComboBox<String> cbCategories;
 
     private HashMap<String, JChip> chipHashMap = new HashMap<String, JChip>();
     private JFXDialogLayout dialogLayout;
     private JFXDialog dialog;
+    private DatabaseHandler dbHandler;
 
     @FXML void btnSearchOnAction(ActionEvent event) {
 
@@ -82,7 +65,14 @@ public class JServices implements Initializable {
     }
 
     @FXML void mngServiceCancelOnAction(ActionEvent event) {
-
+        if(mngServicesSaveBtn.getText().equals("Add")){
+            setManageCategoryFocus(false);
+            new InputHandler(igServiceName).getInputField().setText("");
+            new InputHandler(igServiceProfit).getInputField().setText("");
+            new InputHandler(igServicePrice).getInputField().setText("");
+            cbCategorySelector.getSelectionModel().select(-1);
+            mngServicesSaveBtn.setText("Save");
+        }
     }
 
     @FXML void mngServicesSaveBtnOnAction(ActionEvent event) {
@@ -90,7 +80,7 @@ public class JServices implements Initializable {
     }
 
     @FXML void btnAddServiceOnAction(ActionEvent event) {
-
+        setManageCategoryFocus(true);
     }
 
     @FXML void btnCategoryAddOnAction(ActionEvent event) {
@@ -147,18 +137,15 @@ public class JServices implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ivSearch.setImage(App.getImage("j-search",false));
-        addChip("Sample Chip");
-        addChip("Sample Chip");
-        addChip("Sample Chip");
-        addChip("Sample Chip");
-        addChip("Sample Chip");
-        addChip("Sample Chip");
-        addChip("Sample Chip");
-        addChip("Sample Chip");
+        dbHandler = new DatabaseHandler();
+        loadServices();
+        setFieldsEditable(false);
+        InputHandler.decimalOnly(new InputHandler(igServicePrice));
+        InputHandler.decimalOnly(new InputHandler(igServiceProfit));
     }
 
-    private void addChip(String label){
-        String id = "chip-"+(chipHashMap.size()+1);
+    private void addChip(int chipId,String label){
+        String id = "chip-"+(chipId);
         JChip jChip = new JChip(label,true);
         jChip.setId(id);
         jChip.setCloseOnAction(e->{
@@ -218,5 +205,45 @@ public class JServices implements Initializable {
         });
         chipHashMap.put(id,jChip);
         fpCategoryContainer.getChildren().add(jChip);
+    }
+
+    private void loadServices(){
+        String sql = "Select * from jays_category";
+        cbCategorySelector.getItems().clear();
+        cbCategories.getItems().clear();
+        chipHashMap.clear();
+        fpCategoryContainer.getChildren().clear();
+        try {
+            dbHandler.startConnection();
+            ResultSet resultSet = dbHandler.execQuery(sql);
+            while (resultSet.next()){
+                int category_id = resultSet.getInt("category_id");
+                String category_name = resultSet.getString("category_name");
+                cbCategories.getItems().add(category_name);
+                cbCategorySelector.getItems().add(category_name);
+                addChip(category_id,category_name);
+            }
+            dbHandler.closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            dbHandler.closeConnection();
+        }
+    }
+
+    private final void setFieldsEditable(boolean disabler){
+        cbCategorySelector.setDisable(!disabler);
+        new InputHandler(igServiceName).getInputField().setEditable(disabler);
+        new InputHandler(igServicePrice).getInputField().setEditable(disabler);
+        new InputHandler(igServiceProfit).getInputField().setEditable(disabler);
+    }
+
+    private void setManageCategoryFocus(boolean isFocused){
+        mngCategories.setDisable(isFocused);
+        tableContainer.setDisable(isFocused);
+        mngServicesSaveBtn.setText("Add");
+        btnSearch.setDisable(isFocused);
+        tfSearch.setDisable(isFocused);
+        cbCategories.setDisable(isFocused);
+        setFieldsEditable(isFocused);
     }
 }

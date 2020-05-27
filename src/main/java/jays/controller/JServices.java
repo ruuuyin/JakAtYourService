@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXDialogLayout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -15,7 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import jays.App;
+import jays.controller.component.DialogType;
 import jays.controller.component.JChip;
+import jays.controller.component.JDialogPopup;
 import jays.data.DatabaseHandler;
 import jays.utils.InputHandler;
 
@@ -24,6 +25,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class JServices implements Initializable {
 
@@ -65,8 +68,8 @@ public class JServices implements Initializable {
     }
 
     @FXML void mngServiceCancelOnAction(ActionEvent event) {
-        if(mngServicesSaveBtn.getText().equals("Add")){
-            setManageCategoryFocus(false);
+        if(isAdd()){
+            setManageServices(false);
             new InputHandler(igServiceName).getInputField().setText("");
             new InputHandler(igServiceProfit).getInputField().setText("");
             new InputHandler(igServicePrice).getInputField().setText("");
@@ -76,11 +79,51 @@ public class JServices implements Initializable {
     }
 
     @FXML void mngServicesSaveBtnOnAction(ActionEvent event) {
-
+        if (isAdd()){
+            InputHandler service_name = new InputHandler(igServiceName);
+            InputHandler service_price = new InputHandler(igServicePrice);
+            InputHandler service_profit = new InputHandler(igServiceProfit);
+            if (service_name.getInputField().getText().equals("")||
+                    service_price.getInputField().getText().equals("")||
+                    service_profit.getInputField().getText().equals("")||
+                    cbCategorySelector.getSelectionModel().getSelectedItem()==null){
+                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                        rootPane.getChildren().get(0),
+                        "Operation Failed",
+                        "Please fill all the required fields",
+                        DialogType.ERROR));
+            }else{
+                AtomicReference<String> id = new AtomicReference<>();
+                chipHashMap.forEach((k,v)->{
+                    if (v.getLabel().toLowerCase().equals(cbCategorySelector.getSelectionModel().getSelectedItem().toLowerCase()))
+                        id.set(k.split("-")[1]);
+                });
+                dbHandler.startConnection();
+                String sql = String.format("insert into jays_service(service_name,service_price,service_profit,service_category) " +
+                                "values('%s',%s,%s,%s)",
+                        service_name.getInputField().getText(),
+                        service_price.getInputField().getText(),
+                        service_profit.getInputField().getText()
+                        ,id.get());
+                dbHandler.execUpdate(sql);
+                dbHandler.closeConnection();
+                setManageServices(false);
+                new InputHandler(igServiceName).getInputField().setText("");
+                new InputHandler(igServiceProfit).getInputField().setText("");
+                new InputHandler(igServicePrice).getInputField().setText("");
+                mngServicesSaveBtn.setText("Save");
+                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                        rootPane.getChildren().get(0),
+                        "Operation Success",
+                        "New service has been added",
+                        DialogType.SUCCESS));
+            }
+        }
     }
 
     @FXML void btnAddServiceOnAction(ActionEvent event) {
-        setManageCategoryFocus(true);
+        setManageServices(true);
+        resetTextField();
     }
 
     @FXML void btnCategoryAddOnAction(ActionEvent event) {
@@ -118,13 +161,22 @@ public class JServices implements Initializable {
         btnAdd.setPrefWidth(120);
         btnAdd.getStyleClass().addAll("buttonImportantOutlined","buttonTextSecondary");
         btnAdd.setOnAction(event1 -> {
+            AtomicBoolean exist = new AtomicBoolean(false);
             chipHashMap.forEach((k,v)->{
                 if (v.getLabel().toLowerCase().equals(input.getText().toLowerCase())){
                     errorDisplayer.setText("The category is already exist");
                     errorDisplayer.setVisible(true);
+                    exist.set(true);
                 }
             });
-            //TODO Create add action here
+            if (!exist.get()){
+                dbHandler.startConnection();
+                dbHandler.execUpdate(String.format("Insert into jays_category(category_name) values('%s');",input.getText()));
+                dbHandler.closeConnection();
+                loadServices();
+                dialog.close();
+                //TODO Add push Notification here if possible
+            }
         });
 
         dialogLayout.setHeading(header);
@@ -142,6 +194,7 @@ public class JServices implements Initializable {
         setFieldsEditable(false);
         InputHandler.decimalOnly(new InputHandler(igServicePrice));
         InputHandler.decimalOnly(new InputHandler(igServiceProfit));
+        resetTextField();
     }
 
     private void addChip(int chipId,String label){
@@ -188,13 +241,26 @@ public class JServices implements Initializable {
             btnAdd.setPrefWidth(120);
             btnAdd.getStyleClass().addAll("buttonImportantOutlined","buttonTextSecondary");
             btnAdd.setOnAction(event1 -> {
-                chipHashMap.forEach((k,v)->{
-                    if (v.getLabel().toLowerCase().equals(input.getText().toLowerCase())){
-                        errorDisplayer.setText("The category is already exist");
-                        errorDisplayer.setVisible(true);
+                if (jChip.getLabel().toLowerCase().equals(input.getText().toLowerCase())){
+                    dialog.close();
+                }else{
+                    AtomicBoolean exist = new AtomicBoolean(false);
+                    chipHashMap.forEach((k,v)->{
+                        if (v.getLabel().toLowerCase().equals(input.getText().toLowerCase())){
+                            errorDisplayer.setText("The category is already exist");
+                            errorDisplayer.setVisible(true);
+                            exist.set(true);
+                        }
+                    });
+                    if (!exist.get()){
+                        dbHandler.startConnection();
+                        dbHandler.execUpdate(String.format("Update jays_category set category_name = '%s' where category_id = "+chipId+";",input.getText()));
+                        dbHandler.closeConnection();
+                        loadServices();
+                        dialog.close();
+                        //TODO Add push Notification here if possible
                     }
-                });
-                //TODO Create edit action here
+                }
             });
 
             dialogLayout.setHeading(header);
@@ -237,7 +303,7 @@ public class JServices implements Initializable {
         new InputHandler(igServiceProfit).getInputField().setEditable(disabler);
     }
 
-    private void setManageCategoryFocus(boolean isFocused){
+    private void setManageServices(boolean isFocused){
         mngCategories.setDisable(isFocused);
         tableContainer.setDisable(isFocused);
         mngServicesSaveBtn.setText("Add");
@@ -245,5 +311,28 @@ public class JServices implements Initializable {
         tfSearch.setDisable(isFocused);
         cbCategories.setDisable(isFocused);
         setFieldsEditable(isFocused);
+    }
+
+    private final boolean isAdd(){
+        return mngServicesSaveBtn.getText().equals("Add");
+    }
+
+    private final void resetTextField(){
+        InputHandler service_name = new InputHandler(igServiceName);
+        InputHandler service_price = new InputHandler(igServiceProfit);
+        InputHandler service_profit = new InputHandler(igServicePrice);
+        InputHandler service_category = new InputHandler(igServiceCategory);
+        cbCategorySelector.getSelectionModel().select(-1);
+        service_name.getInputField().setText("");
+        service_price.getInputField().setText("");
+        service_profit.getInputField().setText("");
+        service_name.getInputSubIdentifier().setVisible(true);
+        service_name.getInputSubIdentifier().setText("Required");
+        service_price.getInputSubIdentifier().setVisible(true);
+        service_price.getInputSubIdentifier().setText("Required");
+        service_profit.getInputSubIdentifier().setVisible(true);
+        service_profit.getInputSubIdentifier().setText("Required");
+        service_category.getInputSubIdentifier().setVisible(true);
+        service_category.getInputSubIdentifier().setText("Required");
     }
 }

@@ -34,7 +34,7 @@ public class DatabaseHandler {
 
         url = properties.getProperty("dbURL");
         usr = properties.getProperty("dbUsername");
-        pass = properties.getProperty("dbPass");
+        pass = properties.getProperty("dbPass").equals("N/A")?"":properties.getProperty("dbPass");
 
         is.close();
     }

@@ -36,4 +36,8 @@ public abstract class TableLoader <T>{
     public ObservableList<T> getList(){
         return data;
     }
+
+    public void clearList(){
+        data.clear();
+    }
 }

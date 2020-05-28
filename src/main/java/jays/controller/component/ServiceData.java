@@ -1,6 +1,7 @@
 package jays.controller.component;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import jays.data.entity.Service;
@@ -13,6 +14,7 @@ public class ServiceData extends Service {
         super(service_id, service_name, service_status, service_price, service_profit, service_category);
         this.action = new HBox(2);
         this.action.setAlignment(Pos.CENTER);
+        this.action.setPadding(new Insets(15,0,15,0));
         this.action.getChildren().addAll(generateActivateButton(),generateDeleteButton());
     }
 

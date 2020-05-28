@@ -116,6 +116,7 @@ public class JServices implements Initializable {
                         "Operation Success",
                         "New service has been added",
                         DialogType.SUCCESS));
+                this.queryAllServices();
             }
         }
     }
@@ -204,8 +205,7 @@ public class JServices implements Initializable {
                 colAction.setCellValueFactory(new PropertyValueFactory<ServiceData,HBox>("action"));
             }
         };
-
-        tableLoader.add(new ServiceData(1,"Service Name",true,1000,100,"Hot Oil"));
+        queryAllServices();
     }
 
     private void addChip(int chipId,String label){
@@ -345,5 +345,35 @@ public class JServices implements Initializable {
         service_profit.getInputSubIdentifier().setText("Required");
         service_category.getInputSubIdentifier().setVisible(true);
         service_category.getInputSubIdentifier().setText("Required");
+    }
+
+    private final void queryAllServices(){
+        dbHandler.startConnection();
+        ResultSet resultSet = dbHandler.execQuery(
+                "select s.service_id as id,\n" +
+                "       s.service_name as name,\n" +
+                "       s.service_status as status,\n" +
+                "       s.service_price as price,\n" +
+                "       s.service_profit as profit,\n" +
+                "       c.category_name as category\n" +
+                "from jays_service as s\n" +
+                "    join jays_category as c\n" +
+                "        on s.service_category = c.category_id\n");
+        try {
+            tableLoader.clearList();
+            while (resultSet.next()){
+                tableLoader.add(new ServiceData(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getBoolean("status"),
+                        resultSet.getFloat("price"),
+                        resultSet.getFloat("profit"),
+                        resultSet.getString("category")
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        dbHandler.closeConnection();
     }
 }

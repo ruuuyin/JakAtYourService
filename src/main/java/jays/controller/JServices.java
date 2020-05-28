@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -56,7 +57,8 @@ public class JServices implements Initializable {
     private JFXDialogLayout dialogLayout;
     private JFXDialog dialog;
     private DatabaseHandler dbHandler;
-    private TableLoader<ServiceData> tableLoader;
+    private static TableLoader<ServiceData> tableLoader;
+    public static StackPane staticNode;
 
     @FXML void btnSearchOnAction(ActionEvent event) {
 
@@ -195,6 +197,7 @@ public class JServices implements Initializable {
         InputHandler.decimalOnly(new InputHandler(igServicePrice));
         InputHandler.decimalOnly(new InputHandler(igServiceProfit));
         resetTextField();
+        staticNode = rootPane;
         tableLoader = new TableLoader<ServiceData>(this.tvService) {
             @Override
             public void loadCell() {
@@ -347,7 +350,8 @@ public class JServices implements Initializable {
         service_category.getInputSubIdentifier().setText("Required");
     }
 
-    private final void queryAllServices(){
+    public final static void queryAllServices(){
+        DatabaseHandler dbHandler = new DatabaseHandler();
         dbHandler.startConnection();
         ResultSet resultSet = dbHandler.execQuery(
                 "select s.service_id as id,\n" +
@@ -358,7 +362,8 @@ public class JServices implements Initializable {
                 "       c.category_name as category\n" +
                 "from jays_service as s\n" +
                 "    join jays_category as c\n" +
-                "        on s.service_category = c.category_id\n");
+                "        on s.service_category = c.category_id\n " +
+                        "where s.service_deleted = 0");
         try {
             tableLoader.clearList();
             while (resultSet.next()){

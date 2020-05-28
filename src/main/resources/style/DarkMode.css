@@ -469,3 +469,8 @@ Button:hover{
 .chipClose:hover{
     opacity:0.8;
 }
+
+.table-action{
+    -fx-background-radius: 5px;
+    -fx-background-radius: 5px;
+}

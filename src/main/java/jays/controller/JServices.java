@@ -6,18 +6,15 @@ import com.jfoenix.controls.JFXDialogLayout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import jays.App;
-import jays.controller.component.DialogType;
-import jays.controller.component.JChip;
-import jays.controller.component.JDialogPopup;
+import jays.controller.component.*;
 import jays.data.DatabaseHandler;
+import jays.data.entity.Service;
 import jays.utils.InputHandler;
 
 import java.net.URL;
@@ -32,11 +29,12 @@ public class JServices implements Initializable {
 
     @FXML private StackPane rootPane;
     @FXML private AnchorPane tableContainer;
-    @FXML private TableColumn<?, ?> colServiceName;
-    @FXML private TableColumn<?, ?> colCategory;
-    @FXML private TableColumn<?, ?> colPrice;
-    @FXML private TableColumn<?, ?> colProfit;
-    @FXML private TableColumn<?, ?> colAction;
+    @FXML private TableView<ServiceData> tvService;
+    @FXML private TableColumn<ServiceData, String> colServiceName;
+    @FXML private TableColumn<ServiceData, String> colCategory;
+    @FXML private TableColumn<ServiceData, Float> colPrice;
+    @FXML private TableColumn<ServiceData, Float> colProfit;
+    @FXML private TableColumn<ServiceData, HBox> colAction;
     @FXML private VBox mngServices;
     @FXML private JFXButton btnAddService;
     @FXML private VBox igServiceName;
@@ -58,6 +56,7 @@ public class JServices implements Initializable {
     private JFXDialogLayout dialogLayout;
     private JFXDialog dialog;
     private DatabaseHandler dbHandler;
+    private TableLoader<ServiceData> tableLoader;
 
     @FXML void btnSearchOnAction(ActionEvent event) {
 
@@ -195,6 +194,18 @@ public class JServices implements Initializable {
         InputHandler.decimalOnly(new InputHandler(igServicePrice));
         InputHandler.decimalOnly(new InputHandler(igServiceProfit));
         resetTextField();
+        tableLoader = new TableLoader<ServiceData>(this.tvService) {
+            @Override
+            public void loadCell() {
+                colServiceName.setCellValueFactory(new PropertyValueFactory<ServiceData,String>("service_name"));
+                colCategory.setCellValueFactory(new PropertyValueFactory<ServiceData,String>("service_category"));
+                colPrice.setCellValueFactory(new PropertyValueFactory<ServiceData,Float>("service_price"));
+                colProfit.setCellValueFactory(new PropertyValueFactory<ServiceData,Float>("service_profit"));
+                colAction.setCellValueFactory(new PropertyValueFactory<ServiceData,HBox>("action"));
+            }
+        };
+
+        tableLoader.add(new ServiceData(1,"Service Name",true,1000,100,"Hot Oil"));
     }
 
     private void addChip(int chipId,String label){

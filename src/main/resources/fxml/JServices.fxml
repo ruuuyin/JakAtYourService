@@ -28,7 +28,7 @@
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
                <children>
-                  <TableView prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tvService" prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="colServiceName" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="SERVICE NAME" />
                       <TableColumn fx:id="colCategory" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="CATEGORY" />

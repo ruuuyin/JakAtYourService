@@ -60,6 +60,8 @@ public class JServices implements Initializable {
     private DatabaseHandler dbHandler;
     private static TableLoader<ServiceData> tableLoader;
     public static StackPane staticNode;
+    private int selectedID = 0;
+    private ServiceData selectedData = null;
 
     @FXML void btnSearchOnAction(ActionEvent event) {
 
@@ -81,25 +83,26 @@ public class JServices implements Initializable {
     }
 
     @FXML void mngServicesSaveBtnOnAction(ActionEvent event) {
-        if (isAdd()){
-            InputHandler service_name = new InputHandler(igServiceName);
-            InputHandler service_price = new InputHandler(igServicePrice);
-            InputHandler service_profit = new InputHandler(igServiceProfit);
-            if (service_name.getInputField().getText().equals("")||
-                    service_price.getInputField().getText().equals("")||
-                    service_profit.getInputField().getText().equals("")||
-                    cbCategorySelector.getSelectionModel().getSelectedItem()==null){
-                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
-                        rootPane.getChildren().get(0),
-                        "Operation Failed",
-                        "Please fill all the required fields",
-                        DialogType.ERROR));
-            }else{
-                AtomicReference<String> id = new AtomicReference<>();
-                chipHashMap.forEach((k,v)->{
-                    if (v.getLabel().toLowerCase().equals(cbCategorySelector.getSelectionModel().getSelectedItem().toLowerCase()))
-                        id.set(k.split("-")[1]);
-                });
+        InputHandler service_name = new InputHandler(igServiceName);
+        InputHandler service_price = new InputHandler(igServicePrice);
+        InputHandler service_profit = new InputHandler(igServiceProfit);
+        String name = service_name.getInputField().getText();
+        String price = service_price.getInputField().getText();
+        String profit = service_profit.getInputField().getText();
+        String category = cbCategorySelector.getSelectionModel().getSelectedItem();
+        if (name.equals("")|| price.equals("")|| profit.equals("")|| category==null){
+            JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                    rootPane.getChildren().get(0),
+                    "Operation Failed",
+                    "Please fill all the required fields",
+                    DialogType.ERROR));
+        }else{
+            AtomicReference<String> id = new AtomicReference<>();
+            chipHashMap.forEach((k,v)->{
+                if (v.getLabel().toLowerCase().equals(cbCategorySelector.getSelectionModel().getSelectedItem().toLowerCase()))
+                    id.set(k.split("-")[1]);
+            });
+            if (isAdd()){
                 dbHandler.startConnection();
                 String sql = String.format("insert into jays_service(service_name,service_price,service_profit,service_category) " +
                                 "values('%s',%s,%s,%s)",
@@ -114,14 +117,35 @@ public class JServices implements Initializable {
                 new InputHandler(igServiceProfit).getInputField().setText("");
                 new InputHandler(igServicePrice).getInputField().setText("");
                 mngServicesSaveBtn.setText("Save");
+                setFieldsEditable(false);
                 JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
                         rootPane.getChildren().get(0),
                         "Operation Success",
                         "New service has been added",
                         DialogType.SUCCESS));
                 this.queryAllServices();
+            }else{
+                dbHandler.startConnection();
+                String sql = String.format("update jays_service set service_name='%s',service_price=%s,service_profit=%s,service_category=%s where service_id = %s",
+                        name,price,profit,id.get(),selectedID);
+                selectedData.setService_category(id.get());
+                selectedData.setService_name(name);
+                selectedData.setService_price(Float.parseFloat(price));
+                selectedData.setService_profit(Float.parseFloat(profit));
+                dbHandler.execUpdate(sql);
+                dbHandler.closeConnection();
+                service_name.getInputField().setText("");
+                service_price.getInputField().setText("");
+                service_profit.getInputField().setText("");
+                setFieldsEditable(false);
+                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                        rootPane.getChildren().get(0),
+                        "Operation Success",
+                        "Service has been updated",
+                        DialogType.SUCCESS));
             }
         }
+
     }
 
     @FXML void btnAddServiceOnAction(ActionEvent event) {
@@ -193,6 +217,8 @@ public class JServices implements Initializable {
         ServiceData serviceData =  tvService.getSelectionModel().getSelectedItem();
         if (serviceData!=null){
             setFieldsEditable(true);
+            selectedID = serviceData.getService_id();
+            selectedData = serviceData;
             new InputHandler(igServiceName).getInputField().setText(serviceData.getService_name());
             new InputHandler(igServicePrice).getInputField().setText(String.valueOf(serviceData.getService_price()));
             new InputHandler(igServiceProfit).getInputField().setText(String.valueOf(serviceData.getService_profit()));

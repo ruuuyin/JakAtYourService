@@ -6,16 +6,16 @@ import com.jfoenix.controls.JFXDialogLayout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import jays.App;
 import jays.controller.component.*;
 import jays.data.DatabaseHandler;
-import jays.data.entity.Service;
 import jays.utils.InputHandler;
 
 import java.net.URL;
@@ -52,6 +52,7 @@ public class JServices implements Initializable {
     @FXML private JFXButton btnSearch;
     @FXML private ImageView ivSearch;
     @FXML private ComboBox<String> cbCategories;
+    @FXML private HBox mgnServicesBtn;
 
     private HashMap<String, JChip> chipHashMap = new HashMap<String, JChip>();
     private JFXDialogLayout dialogLayout;
@@ -188,6 +189,26 @@ public class JServices implements Initializable {
         dialog.show();
     }
 
+    @FXML void tvServiceOnMouseClicked(MouseEvent event) {
+        ServiceData serviceData =  tvService.getSelectionModel().getSelectedItem();
+        if (serviceData!=null){
+            setFieldsEditable(true);
+            new InputHandler(igServiceName).getInputField().setText(serviceData.getService_name());
+            new InputHandler(igServicePrice).getInputField().setText(String.valueOf(serviceData.getService_price()));
+            new InputHandler(igServiceProfit).getInputField().setText(String.valueOf(serviceData.getService_profit()));
+            cbCategorySelector.getSelectionModel().select(serviceData.getService_category());
+            mngServicesSaveBtn.setText("Save");
+        }else{
+            setFieldsEditable(false);
+            resetTextField();
+        }
+    }
+
+    @FXML void tfSearchOnKeyReleased(KeyEvent event) {
+
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ivSearch.setImage(App.getImage("j-search",false));
@@ -216,8 +237,36 @@ public class JServices implements Initializable {
         JChip jChip = new JChip(label,true);
         jChip.setId(id);
         jChip.setCloseOnAction(e->{
-            fpCategoryContainer.getChildren().remove(chipHashMap.get(id));
-            chipHashMap.remove(id);
+            AtomicBoolean exist = new AtomicBoolean(false);
+            tableLoader.getList().forEach(data->{
+                //Scan if there are existing services that uses this category
+                if (data.getService_category().equals(jChip.getLabel())){
+                    //Show Message
+                    JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                            rootPane.getChildren().get(0),
+                            "Cannot delete the category",
+                            "Some services depends on this category",
+                            DialogType.ERROR));
+                    exist.set(true);
+                }
+            });
+            if (!exist.get()){
+                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                        rootPane.getChildren().get(0),
+                        "Success",
+                        "Category has been removed.",
+                        DialogType.SUCCESS));
+
+                dbHandler.startConnection();
+                dbHandler.execUpdate("update jays_service set service_category = null where service_category = "+id.split("-")[1]);
+                dbHandler.closeConnection();
+                dbHandler.startConnection();
+                dbHandler.execUpdate("delete from jays_category where category_id = "+id.split("-")[1]);
+                dbHandler.closeConnection();
+                fpCategoryContainer.getChildren().remove(chipHashMap.get(id));
+                chipHashMap.remove(id);
+            }
+
         });
         jChip.setOnAction(e->{
             dialogLayout= new JFXDialogLayout();
@@ -315,6 +364,7 @@ public class JServices implements Initializable {
         new InputHandler(igServiceName).getInputField().setEditable(disabler);
         new InputHandler(igServicePrice).getInputField().setEditable(disabler);
         new InputHandler(igServiceProfit).getInputField().setEditable(disabler);
+        mgnServicesBtn.setDisable(!disabler);
     }
 
     private void setManageServices(boolean isFocused){
@@ -325,6 +375,7 @@ public class JServices implements Initializable {
         tfSearch.setDisable(isFocused);
         cbCategories.setDisable(isFocused);
         setFieldsEditable(isFocused);
+
     }
 
     private final boolean isAdd(){

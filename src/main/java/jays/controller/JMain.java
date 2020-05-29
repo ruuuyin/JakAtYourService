@@ -58,6 +58,7 @@ public class JMain implements Initializable {
     if (button.equals(navServices)) scanMap(navServices,"JServices");
     else if (button.equals(navCustomer))scanMap(navCustomer,"JCustomer");
     else if (button.equals(navTransaction))scanMap(navTransaction,"JTransaction");
+    else if (button.equals(navRecord))scanMap(navRecord,"JRecord");
   }
 
   private void scanMap(JFXButton btn,String fxmlName){

@@ -33,6 +33,10 @@ public abstract class TableLoader <T>{
         this.data.addAll(data);
     }
 
+    public void remove(T data){
+        this.data.remove(data);
+    }
+
     public ObservableList<T> getList(){
         return data;
     }

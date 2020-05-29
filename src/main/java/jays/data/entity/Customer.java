@@ -50,4 +50,9 @@ public class Customer {
     public int getCustomer_id() {
         return customer_id;
     }
+
+    @Override
+    public String toString() {
+        return  customer_id +" - " + customer_first + " " + customer_middle +" "+ customer_last;
+    }
 }

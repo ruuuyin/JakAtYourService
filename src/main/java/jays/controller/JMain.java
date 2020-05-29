@@ -57,6 +57,7 @@ public class JMain implements Initializable {
   private void openScene(JFXButton button){
     if (button.equals(navServices)) scanMap(navServices,"JServices");
     else if (button.equals(navCustomer))scanMap(navCustomer,"JCustomer");
+    else if (button.equals(navTransaction))scanMap(navTransaction,"JTransaction");
   }
 
   private void scanMap(JFXButton btn,String fxmlName){

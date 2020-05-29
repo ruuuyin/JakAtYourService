@@ -24,10 +24,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import jays.App;
-import jays.controller.component.AvailableServicesData;
-import jays.controller.component.DialogType;
-import jays.controller.component.JDialogPopup;
-import jays.controller.component.TableLoader;
+import jays.controller.component.*;
 import jays.data.DatabaseHandler;
 import jays.data.entity.Customer;
 
@@ -71,6 +68,7 @@ public class JTransaction implements Initializable {
     public static TableLoader<AvailableServicesData> tblSelected;
     public static StackPane staticNode;
     public static Label lServices,lAmount,lProfit;
+    private static ArrayList<AvailableServicesData> serviceList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -151,7 +149,16 @@ public class JTransaction implements Initializable {
     }
 
     @FXML void btnSearchOnAction(ActionEvent event) {
-
+        if (tfSearch.getText().equals("")){
+            queryAvailableServices();
+        }else{
+            tblAvailable.getList().clear();
+            serviceList.forEach(e->{
+                if (e.getService_name().toLowerCase().contains(tfSearch.getText().toLowerCase())){
+                    tblAvailable.getList().add(e);
+                }
+            });
+        }
     }
 
     @FXML void tfSearchOnKeyRelease(KeyEvent event) {
@@ -192,6 +199,8 @@ public class JTransaction implements Initializable {
             throwables.printStackTrace();
         }
         dbHandler.closeConnection();
+        serviceList.clear();
+        serviceList.addAll(tblAvailable.getList());
     }
 
     public static ArrayList<Customer> customerList = new ArrayList<>();
@@ -220,6 +229,8 @@ public class JTransaction implements Initializable {
             throwables.printStackTrace();
             dbHandler.closeConnection();
         }
+
+
     }
 
     private void resetFields(){

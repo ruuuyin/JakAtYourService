@@ -21,6 +21,7 @@ import jays.utils.InputHandler;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -62,13 +63,32 @@ public class JServices implements Initializable {
     public static StackPane staticNode;
     private int selectedID = 0;
     private ServiceData selectedData = null;
+    private static ArrayList<ServiceData> serviceList = new ArrayList<>();
 
     @FXML void btnSearchOnAction(ActionEvent event) {
-
+        if (tfSearch.getText().equals("")){
+            queryAllServices();
+        }else{
+            tableLoader.getList().clear();
+            serviceList.forEach(e->{
+                if (e.getService_name().toLowerCase().contains(tfSearch.getText().toLowerCase())){
+                    tableLoader.getList().add(e);
+                }
+            });
+        }
     }
 
     @FXML void cbCategoriesOnAction(ActionEvent event) {
-
+        if (cbCategories.getSelectionModel().getSelectedIndex()==0){
+            queryAllServices();
+        }else{
+            tableLoader.getList().clear();
+            serviceList.forEach(e->{
+                if (e.getService_category().contains(cbCategories.getSelectionModel().getSelectedItem())){
+                    tableLoader.getList().add(e);
+                }
+            });
+        }
     }
 
     @FXML void mngServiceCancelOnAction(ActionEvent event) {
@@ -366,6 +386,7 @@ public class JServices implements Initializable {
         cbCategories.getItems().clear();
         chipHashMap.clear();
         fpCategoryContainer.getChildren().clear();
+        cbCategories.getItems().add("All");
         try {
             dbHandler.startConnection();
             ResultSet resultSet = dbHandler.execQuery(sql);
@@ -455,5 +476,7 @@ public class JServices implements Initializable {
             throwables.printStackTrace();
         }
         dbHandler.closeConnection();
+        serviceList.clear();
+        serviceList.addAll(tableLoader.getList());
     }
 }

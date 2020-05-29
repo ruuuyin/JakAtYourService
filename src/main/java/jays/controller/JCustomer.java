@@ -26,6 +26,7 @@ import jays.utils.InputHandler;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class JCustomer implements Initializable {
@@ -44,7 +45,7 @@ public class JCustomer implements Initializable {
     @FXML private JFXButton mngCustomerCancel;
     @FXML private JFXButton mngCustomerSave;
     @FXML private JFXButton btnTransactionHistory;
-    @FXML private ListView<?> lvTransactionHistory;
+    @FXML private ListView<String> lvTransactionHistory;
     @FXML private TextField tfSearch;
     @FXML private JFXButton btnSearch;
     @FXML private ImageView ivSearch;
@@ -62,6 +63,7 @@ public class JCustomer implements Initializable {
     private InputHandler inputMiddle;
     private InputHandler inputLast;
     private InputHandler inputContact;
+    private static ArrayList<CustomerData> customerData = new ArrayList<>();
 
     @FXML void btnCustomerAddOnAction(ActionEvent event) {
         resetFields();
@@ -70,7 +72,16 @@ public class JCustomer implements Initializable {
     }
 
     @FXML void btnSearchOnAction(ActionEvent event) {
-
+        if (tfSearch.getText().equals("")){
+            queryAllServices();
+        }else{
+            tableLoader.getList().clear();
+            customerData.forEach(e->{
+                if (e.getFullName().toLowerCase().contains(tfSearch.getText().toLowerCase())){
+                    tableLoader.getList().add(e);
+                }
+            });
+        }
     }
 
     @FXML void btnTransactionHistoryOnAction(ActionEvent event) {
@@ -144,6 +155,25 @@ public class JCustomer implements Initializable {
             inputMiddle.getInputField().setText(customerData.getCustomer_middle().equals("N/A")?"":customerData.getCustomer_middle());
             inputLast.getInputField().setText(customerData.getCustomer_last());
             inputContact.getInputField().setText(customerData.getCustomer_phone());
+
+            String sql = String.format("SELECT\n" +
+                    "       transaction_date as 'date',\n" +
+                    "       s.service_name as 'service'\n" +
+                    "from jays_transaction as t\n" +
+                    "left join jays_customer c on t.customer = c.customer_id\n" +
+                    "left join jays_service s on t.transaction_service = s.service_id\n" +
+                    "where customer_id = %s\n",selectedData.getCustomer_id());
+            lvTransactionHistory.getItems().clear();
+            dbHandler.startConnection();
+            ResultSet resultSet  =   dbHandler.execQuery(sql);
+            try{
+                while (resultSet.next()){
+                    lvTransactionHistory.getItems().add(resultSet.getString("date")+" - "+resultSet.getString("service"));
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            dbHandler.closeConnection();
         }else{
             setFieldsDisable(false,true);
             resetFields();
@@ -200,6 +230,8 @@ public class JCustomer implements Initializable {
             throwables.printStackTrace();
         }
         dbHandler.closeConnection();
+        customerData.clear();
+        customerData.addAll(tableLoader.getList());
     }
 
     public void resetFields(){

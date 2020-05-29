@@ -8,23 +8,27 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import jays.App;
+import jays.controller.component.DialogType;
 import jays.controller.component.JDialogPopup;
+import jays.data.AES;
+import jays.data.DatabaseHandler;
 import jays.data.JsonWorker;
 import jays.data.entity.SystemInfo;
 import jays.data.entity.User;
 import jays.utils.Directory;
 import jays.utils.SceneRouter;
 
-import javax.swing.*;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -39,11 +43,15 @@ public class JMain implements Initializable {
   @FXML private ImageView icAvatar;
   @FXML private ImageView ivDropDown;
   @FXML private AnchorPane subSceneContainer;
-
+  private JFXDialogLayout dialogLayout;
+  private JDialogPopup dialogPopup;
+  private JFXDialog dialog;
+  private User user;
   private HashMap<JFXButton,Boolean> openedSceneMap;
+  private static BoxBlur blur = new BoxBlur(4,4,4);
 
   @Override public void initialize(URL location, ResourceBundle resources) {
-    User user  = (User) JsonWorker.fromJson("UserInfo",User.class);
+    user  = (User) JsonWorker.fromJson("UserInfo",User.class);
     icAvatar.setImage(new Image(getClass().getResource(Directory.AVATARS+user.getAvatar()+".png").toString()));
     lblUser.setText("@"+user.getUser());
     openedSceneMap = new HashMap<>();
@@ -54,19 +62,14 @@ public class JMain implements Initializable {
     ivDropDown.setImage(App.getImage("j-menu",true));
   }
 
-
   @FXML void navAction(ActionEvent event) {
     JFXButton btn = (JFXButton) event.getSource();
     openScene(btn);
   }
 
-
   @FXML void logoOnClick(MouseEvent event) {
 
   }
-  private JFXDialogLayout dialogLayout;
-  private JDialogPopup dialogPopup;
-  private JFXDialog dialog;
 
   @FXML void menuOnClick(MouseEvent event) {
     dialogLayout = JDialogPopup.createContentOnly(rootPane,rootPane.getChildren().get(0),"Select an Action",true,generateMenuSelection());
@@ -107,7 +110,8 @@ public class JMain implements Initializable {
     VBox.setMargin(btn,new Insets(5.0));
     btn.getStyleClass().add("buttonNormal");
     btn.setOnAction(event -> {
-      //TODO set Action here
+      JDialogPopup.closeDialog(dialogLayout);
+      showChangeUsername();
     });
     return btn;
   }
@@ -118,7 +122,8 @@ public class JMain implements Initializable {
     VBox.setMargin(btn,new Insets(5.0));
     btn.getStyleClass().add("buttonNormal");
     btn.setOnAction(event -> {
-      //TODO set Action here
+      JDialogPopup.closeDialog(dialogLayout);
+      showChangePassword();
     });
     return btn;
   }
@@ -135,7 +140,7 @@ public class JMain implements Initializable {
   }
 
   private JFXButton generateThemSwitcher(){
-    JFXButton btn = new JFXButton(App.systemInfo().getTheme().toLowerCase().equals("DarkMode")?"Switch to Light Mode":"Switch to Dark Mode");
+    JFXButton btn = new JFXButton(App.systemInfo().getTheme().equals("DarkMode")?"Switch to Light Mode":"Switch to Dark Mode");
     btn.setMaxWidth(Double.MAX_VALUE);
     VBox.setMargin(btn,new Insets(5.0));
     btn.getStyleClass().add("buttonImportantOutlined");
@@ -150,6 +155,7 @@ public class JMain implements Initializable {
         rootPane.getScene().getStylesheets().setAll(App.styleSheet());
       }
       JDialogPopup.closeDialog(dialogLayout);
+      ivDropDown.setImage(App.getImage("j-menu",true));
     });
     return btn;
   }
@@ -160,7 +166,8 @@ public class JMain implements Initializable {
     VBox.setMargin(btn,new Insets(5.0));
     btn.getStyleClass().add("buttonDangerOutlined");
     btn.setOnAction(event -> {
-      //TODO set Action here
+      App.clearData("UserInfo");
+      SceneRouter.changeStage(rootPane,"JLogin","Jak at your Service");
     });
     return btn;
   }
@@ -172,6 +179,156 @@ public class JMain implements Initializable {
     vBox.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
     vBox.getChildren().setAll(generateChangeUserName(),generateChangePassword(),generateChangeAvatar(),generateThemSwitcher(),generateSignOut());
     return vBox;
+  }
+
+  private void showChangeUsername(){
+    dialogLayout= new JFXDialogLayout();
+    dialog = new JFXDialog(rootPane,dialogLayout,JFXDialog.DialogTransition.TOP);
+    dialog.setOverlayClose(false);
+    Label header = new Label("Change Username");
+    header.getStyleClass().add("headerLabel");
+
+    TextField input = new TextField(user.getUser());
+    input.setPromptText("Enter your new username here");
+    input.setPrefSize(441.0,34.0);
+    input.setFont(new Font("Segoe UI",16));
+
+
+    Label errorDisplayer = new Label();
+    errorDisplayer.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+    errorDisplayer.setPrefSize(Region.USE_COMPUTED_SIZE,16.0);
+    errorDisplayer.getStyleClass().add("errorLabel");
+    errorDisplayer.setVisible(false);
+    VBox.setVgrow(errorDisplayer, Priority.ALWAYS);
+
+    VBox content = new VBox();
+    content.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    content.setPrefWidth(Region.USE_COMPUTED_SIZE);
+    content.getChildren().addAll(errorDisplayer,input);
+
+    JFXButton cancel = new JFXButton("Cancel");
+    cancel.setPrefWidth(120);
+    cancel.getStyleClass().addAll("buttonNormal","buttonTextSecondary");
+    cancel.setOnAction(event1 -> {
+      dialog.close();
+    });
+
+    JFXButton btnAdd = new JFXButton("Save");
+    btnAdd.setPrefWidth(120);
+    btnAdd.getStyleClass().addAll("buttonImportantOutlined","buttonTextSecondary");
+    btnAdd.setOnAction(event1 -> {
+
+        if (input.getText().equals("")){
+          errorDisplayer.setText("Please fill the input field");
+          errorDisplayer.setVisible(true);
+        }else if(user.getUser().equals(input.getText())){
+          dialog.close();
+        }else{
+          try {
+            DatabaseHandler handler = new DatabaseHandler();
+            handler.startConnection();
+            handler.execUpdate(String.format("update jays_user set user_name = '%s' where user_name = '%s'",
+                    input.getText(),user.getUser()));
+            lblUser.setText("@"+input.getText());
+            handler.closeConnection();
+          }catch (Exception e){
+            System.out.println(e.getMessage());
+            //TODO add action here when the user enters existing username
+          }
+          dialog.close();
+        }
+
+      //TODO Add update here
+    });
+
+    dialog.setOnDialogOpened(event -> rootPane.getChildren().get(0).setEffect(blur));
+    dialog.setOnDialogClosed(event -> rootPane.getChildren().get(0).setEffect(null));
+    dialogLayout.setHeading(header);
+    dialogLayout.setBody(content);
+    dialogLayout.setActions(cancel,btnAdd);
+
+    dialog.show();
+  }
+
+  private void showChangePassword(){
+    dialogLayout= new JFXDialogLayout();
+    dialog = new JFXDialog(rootPane,dialogLayout,JFXDialog.DialogTransition.TOP);
+    dialog.setOverlayClose(false);
+    Label header = new Label("Change Password");
+    header.getStyleClass().add("headerLabel");
+
+    PasswordField oldInput = new PasswordField();
+    oldInput.setPromptText("Old Password");
+    oldInput.setPrefSize(441.0,34.0);
+    oldInput.setFont(new Font("Segoe UI",16));
+
+    PasswordField newInput = new PasswordField();
+    newInput.setPromptText("New Password");
+    newInput.setPrefSize(441.0,34.0);
+    newInput.setFont(new Font("Segoe UI",16));
+
+
+    Label errorDisplayer = new Label();
+    errorDisplayer.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+    errorDisplayer.setPrefSize(Region.USE_COMPUTED_SIZE,16.0);
+    errorDisplayer.getStyleClass().add("errorLabel");
+    errorDisplayer.setVisible(false);
+    VBox.setVgrow(errorDisplayer, Priority.ALWAYS);
+
+    VBox content = new VBox(2);
+    content.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    content.setPrefWidth(Region.USE_COMPUTED_SIZE);
+    content.getChildren().addAll(errorDisplayer,oldInput,newInput);
+
+    JFXButton cancel = new JFXButton("Cancel");
+    cancel.setPrefWidth(120);
+    cancel.getStyleClass().addAll("buttonNormal","buttonTextSecondary");
+    cancel.setOnAction(event1 -> {
+      dialog.close();
+    });
+
+    JFXButton btnAdd = new JFXButton("Save");
+    btnAdd.setPrefWidth(120);
+    btnAdd.getStyleClass().addAll("buttonImportantOutlined","buttonTextSecondary");
+    btnAdd.setOnAction(event1 -> {
+
+      if (oldInput.getText().equals("") || newInput.getText().equals("")){
+        errorDisplayer.setText("Please fill the input field");
+        errorDisplayer.setVisible(true);
+      }else{
+        try {
+          DatabaseHandler handler = new DatabaseHandler();
+          handler.startConnection();
+          String sql = String.format("Select * from jays_user where user_name = '%s' and user_password = '%s'",
+                  lblUser.getText().substring(1),
+                  AES.encrypt(oldInput.getText(),"USER"));
+          ResultSet resultSet = handler.execQuery(sql);
+          if (resultSet.next()){
+            handler.closeConnection();
+            handler.startConnection();
+            handler.execUpdate(String.format("update jays_user set user_password = '%s' where user_name = '%s'",
+                    AES.encrypt(newInput.getText(),"USER"),user.getUser()));
+            JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,rootPane.getChildren().get(0),"Update Succes","Password has been updated",DialogType.SUCCESS));
+            handler.closeConnection();
+            dialog.close();
+          }else{
+            errorDisplayer.setText("You've entered wrong password");
+            errorDisplayer.setVisible(true);
+            handler.closeConnection();
+          }
+        }catch (Exception e){
+          System.out.println(e.getMessage());
+        }
+      }
+    });
+
+    dialog.setOnDialogOpened(event -> rootPane.getChildren().get(0).setEffect(blur));
+    dialog.setOnDialogClosed(event -> rootPane.getChildren().get(0).setEffect(null));
+    dialogLayout.setHeading(header);
+    dialogLayout.setBody(content);
+    dialogLayout.setActions(cancel,btnAdd);
+
+    dialog.show();
   }
 
 }

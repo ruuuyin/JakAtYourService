@@ -10,6 +10,7 @@ import jays.data.JsonWorker;
 import jays.data.entity.SystemInfo;
 import jays.utils.Directory;
 
+import java.io.File;
 import java.io.IOException;
 
 public class App extends Application {
@@ -46,5 +47,10 @@ public class App extends Application {
         else if (systemInfo().getTheme().equals("LightMode") && !colorIsHint)
             return new Image(App.class.getResource(Directory.LIGHT_CONTAINER+imageName+".png").toString());
         else return null;
+    }
+    private static final String JSON_DIR = System.getProperty("user.home")+"\\.jays_metadata\\";
+    public static void clearData(String json){
+        File file = new File(JSON_DIR+"\\"+json+".json");
+        file.delete();
     }
 }

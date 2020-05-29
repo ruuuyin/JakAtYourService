@@ -28,9 +28,9 @@
                <children>
                   <TableView fx:id="tvAvailableServices" onMouseClicked="#tvCustomerOnMouseClicked" prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="colAvailableServices" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="328.00000762939453" resizable="false" styleClass="center-cell-item" text="AVAILABLE SERVICES" />
-                        <TableColumn fx:id="colPriceValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="215.99996948242188" resizable="false" sortable="false" styleClass="center-cell-item" text="PRICE VALUE" />
-                        <TableColumn fx:id="colAdd" maxWidth="1.7976931348623157E308" prefWidth="137.5999755859375" resizable="false" styleClass="center-cell-item" text="ADD" />
+                        <TableColumn fx:id="colAvailableServices" maxWidth="-1.0" minWidth="328.00000762939453" prefWidth="333.59998321533203" styleClass="center-cell-item" text="AVAILABLE SERVICES" />
+                        <TableColumn fx:id="colPriceValue" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="211.19998168945312" resizable="false" sortable="false" styleClass="center-cell-item" text="PRICE VALUE" />
+                        <TableColumn fx:id="colAdd" maxWidth="1.7976931348623157E308" minWidth="141.60001220703123" prefWidth="141.60001220703123" styleClass="center-cell-item" text="ADD" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -114,8 +114,8 @@
                         </Label>
                         <TableView fx:id="tvSelectedServices" prefHeight="270.0" prefWidth="594.0">
                           <columns>
-                            <TableColumn fx:id="colSelectedServices" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="470.40008544921875" resizable="false" styleClass="center-cell-item" text="SELECTED SERVICES" />
-                            <TableColumn fx:id="colRemove" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="121.5999755859375" resizable="false" styleClass="center-cell-item" text="REMOVE" />
+                            <TableColumn fx:id="colSelectedServices" maxWidth="1.7976931348623157E308" minWidth="470.40008544921875" prefWidth="470.40008544921875" styleClass="center-cell-item" text="SELECTED SERVICES" />
+                            <TableColumn fx:id="colRemove" maxWidth="122.39999999999998" minWidth="121.5999755859375" prefWidth="122.39999999999998" resizable="false" styleClass="center-cell-item" text="REMOVE" />
                           </columns>
                            <VBox.margin>
                               <Insets top="5.0" />

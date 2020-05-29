@@ -26,7 +26,6 @@ public class JMain implements Initializable {
   @FXML private JFXButton navServices;
   @FXML private JFXButton navCustomer;
   @FXML private JFXButton navRecord;
-  @FXML private JFXButton navSettings;
   @FXML private Label lblUser;
   @FXML private ImageView icAvatar;
   @FXML private ImageView ivDropDown;
@@ -43,7 +42,6 @@ public class JMain implements Initializable {
     openedSceneMap.put(navServices,false);
     openedSceneMap.put(navCustomer,false);
     openedSceneMap.put(navRecord,false);
-    openedSceneMap.put(navSettings,false);
     ivDropDown.setImage(App.getImage("j-menu",true));
   }
 

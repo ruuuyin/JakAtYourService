@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import jays.App;
 import jays.controller.component.AvailableServicesData;
 import jays.controller.component.DialogType;
 import jays.controller.component.JDialogPopup;
@@ -73,6 +74,7 @@ public class JTransaction implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ivSearch.setImage(App.getImage("j-search",false));
         dbHandler = new DatabaseHandler();
         staticNode = rootPane;
 

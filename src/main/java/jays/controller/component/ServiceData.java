@@ -12,7 +12,6 @@ import jays.controller.JServices;
 import jays.data.DatabaseHandler;
 import jays.data.entity.Service;
 
-import java.security.Key;
 
 public class ServiceData extends Service {
 

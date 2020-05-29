@@ -21,16 +21,15 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane layoutX="56.0" layoutY="119.0" prefHeight="573.0" prefWidth="890.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="119.0">
+            <AnchorPane fx:id="apTableContainer" layoutX="56.0" layoutY="119.0" prefHeight="573.0" prefWidth="890.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="119.0">
                <effect>
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
                <children>
                   <TableView fx:id="tvCustomer" prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="colCustomer" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" styleClass="center-cell-item" text="CUSTOMER NAME" />
-                        <TableColumn fx:id="colContact" minWidth="200.0" prefWidth="308.8000030517578" styleClass="center-cell-item" text="CONTACT NUMBER" />
-                        <TableColumn fx:id="colTotalRecord" minWidth="83.20001220703125" prefWidth="171.20001220703125" styleClass="center-cell-item" text="TOTAL RECORD" />
+                        <TableColumn fx:id="colCustomer" maxWidth="398.40003204345703" minWidth="398.40003204345703" prefWidth="398.40003204345703" styleClass="center-cell-item" text="CUSTOMER NAME" />
+                        <TableColumn fx:id="colContact" minWidth="200.0" prefWidth="279.9999084472656" styleClass="center-cell-item" text="CONTACT NUMBER" />
                         <TableColumn fx:id="colAction" maxWidth="210.0" minWidth="210.0" prefWidth="210.0" resizable="false" styleClass="center-cell-item" text="ACTION" />
                      </columns>
                      <columnResizePolicy>
@@ -39,7 +38,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <VBox layoutX="968.0" layoutY="133.0" prefHeight="454.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+            <VBox fx:id="vbCustomer" layoutX="968.0" layoutY="133.0" prefHeight="454.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
                <effect>
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
@@ -165,7 +164,7 @@
                         <Insets bottom="10.0" left="20.0" right="20.0" top="5.0" />
                      </VBox.margin>
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="mngCustomerBtns" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <JFXButton fx:id="mngCustomerCancel" onAction="#mngCustomerCancelOnAction" prefHeight="44.0" prefWidth="420.0" text="Cancel">
                                  <styleClass>
@@ -188,7 +187,7 @@
                   </StackPane>
                </children>
             </VBox>
-            <VBox layoutX="969.0" layoutY="58.0" prefHeight="169.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="523.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+            <VBox fx:id="vbTransaction" layoutX="969.0" layoutY="58.0" prefHeight="169.0" prefWidth="423.0" styleClass="container" AnchorPane.bottomAnchor="523.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
                <effect>
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
@@ -209,14 +208,14 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <ListView prefHeight="178.0" prefWidth="423.0" VBox.vgrow="ALWAYS">
+                  <ListView fx:id="lvTransactionHistory" prefHeight="178.0" prefWidth="423.0" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="20.0" left="2.0" right="2.0" />
                      </VBox.margin>
                   </ListView>
                </children>
             </VBox>
-            <TextField fx:id="tfSearch" layoutX="40.0" layoutY="40.0" prefHeight="38.0" prefWidth="458.0" promptText="Search" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
+            <TextField fx:id="tfSearch" layoutX="40.0" layoutY="40.0" onKeyReleased="#tfSearchOnKeyRelease" prefHeight="38.0" prefWidth="458.0" promptText="Search" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font size="16.0" />
                </font>

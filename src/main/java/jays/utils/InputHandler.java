@@ -40,9 +40,12 @@ public class InputHandler {
         TextField tf = inputHandler.inputField;
         InputHandler.integerOnly(inputHandler);
         tf.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (tf.getText().charAt(0)=='0') InputHandler.limitInput(inputHandler,11);
-            else if(tf.getText().charAt(0)=='9') InputHandler.limitInput(inputHandler,10);
-            else tf.setText("");
+            if (newValue.matches("\\d*\\.")) {
+                if (tf.getText().charAt(0)=='0') InputHandler.limitInput(inputHandler,11);
+                else if(tf.getText().charAt(0)=='9') InputHandler.limitInput(inputHandler,10);
+                else  tf.setText(newValue.replaceAll("[^\\d\\.]", ""));
+            }
+            tf.setText(newValue.replaceAll("[^\\d\\.]", ""));
         });
     }
 

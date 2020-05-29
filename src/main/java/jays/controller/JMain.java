@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -134,7 +136,8 @@ public class JMain implements Initializable {
     VBox.setMargin(btn,new Insets(5.0));
     btn.getStyleClass().add("buttonNormal");
     btn.setOnAction(event -> {
-      //TODO set Action here
+      JDialogPopup.closeDialog(dialogLayout);
+      showAvatarSelector();
     });
     return btn;
   }
@@ -331,4 +334,92 @@ public class JMain implements Initializable {
     dialog.show();
   }
 
+  private FlowPane avatarsContainer;
+
+  private HBox imageContainer(int imageNum){
+    HBox hBox = new HBox();
+    hBox.setMaxSize(85,85);
+    hBox.setPrefSize(85,85);
+    hBox.setMinSize(85,85);
+    hBox.setAlignment(Pos.CENTER);
+    hBox.setId("avatarID-"+imageNum);
+    ImageView imageView = new ImageView(new Image(getClass().getResource(Directory.AVATARS+imageNum+".png").toString(),80,80,true,true));
+    hBox.setStyle(user.getAvatar()!=imageNum
+            ?
+            "-fx-border-radius:50px;" +
+            "    -fx-background-radius:50px;" +
+            "    -fx-border-width:2px;"
+            :
+            "-fx-border-radius:50px;" +
+            "    -fx-background-radius:50px;" +
+            "    -fx-border-width:2px;" +
+            "    -fx-border-color:#38b2ac;"
+            );
+    imageView.setFitWidth(80);
+    imageView.setFitHeight(80);
+    imageView.setOnMouseClicked(e->{
+      for (Node child : avatarsContainer.getChildren()) {
+        child.setStyle("-fx-border-radius:50px;" +
+                "    -fx-background-radius:50px;" +
+                "    -fx-border-width:2px;");
+      }
+      hBox.setStyle("-fx-border-radius:50px;" +
+              "    -fx-background-radius:50px;" +
+              "    -fx-border-width:2px;" +
+              "    -fx-border-color:#38b2ac;");
+      selectedAvatar = imageNum;
+    });
+    hBox.getChildren().add(imageView);
+    return hBox;
+  }
+
+  private FlowPane generateFlowPane(){
+    avatarsContainer = new FlowPane(10,10);
+    avatarsContainer.setMaxSize(393,366);
+    avatarsContainer.setPrefSize(393,366);
+    avatarsContainer.setMinSize(393,366);
+    avatarsContainer.setAlignment(Pos.CENTER);
+    for (int i = 1; i <=16 ; i++) {
+      avatarsContainer.getChildren().add(imageContainer(i));
+    }
+    return avatarsContainer;
+  }
+
+  private int selectedAvatar=0;
+  private void showAvatarSelector(){
+    dialogLayout= new JFXDialogLayout();
+    dialog = new JFXDialog(rootPane,dialogLayout,JFXDialog.DialogTransition.TOP);
+    dialog.setOverlayClose(false);
+    Label header = new Label("Select Avatar");
+    header.getStyleClass().add("headerLabel");
+
+
+
+    JFXButton cancel = new JFXButton("Cancel");
+    cancel.setPrefWidth(120);
+    cancel.getStyleClass().addAll("buttonNormal","buttonTextSecondary");
+    cancel.setOnAction(event1 -> {
+      dialog.close();
+    });
+
+    JFXButton btnAdd = new JFXButton("Save");
+    btnAdd.setPrefWidth(120);
+    btnAdd.getStyleClass().addAll("buttonImportantOutlined","buttonTextSecondary");
+    btnAdd.setOnAction(event1 -> {
+      DatabaseHandler handler = new DatabaseHandler();
+      handler.startConnection();
+      handler.execUpdate("Update jays_user set user_avatar = "+selectedAvatar +" where user_name = '"+lblUser.getText().split("@")[0]+"'");
+      handler.closeConnection();
+      icAvatar.setImage(new Image(getClass().getResource(Directory.AVATARS+selectedAvatar+".png").toString()));
+      dialog.close();
+    });
+
+    dialog.setOnDialogOpened(event -> rootPane.getChildren().get(0).setEffect(blur));
+    dialog.setOnDialogClosed(event -> rootPane.getChildren().get(0).setEffect(null));
+    dialogLayout.setHeading(header);
+    dialogLayout.setBody(generateFlowPane());
+    dialogLayout.setActions(cancel,btnAdd);
+
+    dialog.show();
+  }
 }

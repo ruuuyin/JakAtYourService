@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource(Directory.FXML +"JLogin.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource(Directory.FXML +"JMain.fxml"));
         stage.setScene(new Scene(parent));
         stage.getScene().getStylesheets().add(styleSheet());
         stage.show();

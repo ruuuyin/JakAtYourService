@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="rootPane" prefHeight="698.0" prefWidth="436.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JCreateAccount">
+   <children>
+      <AnchorPane prefHeight="696.0" prefWidth="436.0">
+         <children>
+            <VBox layoutX="85.0" layoutY="24.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="43.0" styleClass="headerLabel" text="Create an Account" />
+                  <TextField fx:id="tfUserName" promptText="Username" />
+                  <PasswordField fx:id="tfPassword" promptText="Password" />
+               </children>
+            </VBox>
+            <VBox layoutX="20.0" layoutY="196.0" prefHeight="441.0" prefWidth="396.0" spacing="10.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="196.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="43.0" styleClass="headerLabel" text="Choose an Avatar" />
+                  <FlowPane fx:id="fpAvatarContainer" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="366.0" minWidth="-Infinity" prefHeight="394.0" prefWidth="396.0" styleClass="container" vgap="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/1.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar1" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/2.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar2" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/3.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar3" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/4.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar4" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/5.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar11" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/6.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar21" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/7.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar31" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/8.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar5" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/9.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar12" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/10.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar22" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/11.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar32" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/12.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar6" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/13.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar13" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/14.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar23" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/15.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="85.0" maxWidth="85.0" prefHeight="85.0" prefWidth="85.0">
+                           <children>
+                              <ImageView fx:id="icAvatar33" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#avatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../img/avatars/16.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </FlowPane>
+               </children>
+            </VBox>
+            <HBox layoutX="20.0" layoutY="652.0" prefHeight="58.0" prefWidth="396.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <children>
+                  <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btnCancelOnAction" styleClass="buttonNormal" text="Cancel" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btnProceedOnAction" styleClass="buttonImportantFilled" text="Proceed" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children></HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

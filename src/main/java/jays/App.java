@@ -14,13 +14,34 @@ import java.io.File;
 import java.io.IOException;
 
 public class App extends Application {
-
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource(Directory.FXML +"JLogin.fxml"));
-        stage.setScene(new Scene(parent));
-        stage.getScene().getStylesheets().add(styleSheet());
-        stage.show();
+        File file = new File(JSON_DIR);
+        if (!file.exists()){
+            Parent parent = FXMLLoader.load(getClass().getResource(Directory.FXML +"JCreateAccount.fxml"));
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            stage.setTitle("Setup");
+            stage.centerOnScreen();
+            stage.setMaxHeight(scene.getHeight());
+            stage.setMaxWidth(scene.getWidth());
+            stage.setMinWidth(scene.getWidth());
+            stage.setMinHeight(scene.getHeight());
+            stage.getScene().getStylesheets().add(App.class.getResource(Directory.STYLE+"LightMode.css").toString());
+            stage.show();
+        }else{
+            Parent parent = FXMLLoader.load(getClass().getResource(Directory.FXML +"JLogin.fxml"));
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.setMaxHeight(scene.getHeight());
+            stage.setMaxWidth(scene.getWidth());
+            stage.setMinWidth(scene.getWidth());
+            stage.setMinHeight(scene.getHeight());
+            stage.getScene().getStylesheets().add(styleSheet());
+            stage.show();
+        }
+
     }
 
     public static void main(String[] args) {

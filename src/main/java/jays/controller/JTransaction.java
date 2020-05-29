@@ -24,6 +24,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import jays.controller.component.AvailableServicesData;
+import jays.controller.component.DialogType;
+import jays.controller.component.JDialogPopup;
 import jays.controller.component.TableLoader;
 import jays.data.DatabaseHandler;
 import jays.data.entity.Customer;
@@ -31,7 +33,9 @@ import jays.data.entity.Customer;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -91,39 +95,57 @@ public class JTransaction implements Initializable {
         queryAvailableServices();
         loadComboBox();
 
-        /* tl = new Timeline(new KeyFrame(Duration.ZERO,event -> {
-
-            if (tblSelected.getList().size()>0){
-                AtomicInteger services= new AtomicInteger();
-                AtomicReference<Float> overallprice= new AtomicReference<>(0f);
-                AtomicReference<Float> profit= new AtomicReference<>(0f);
-                tblSelected.getList().forEach(data->{
-                    services.getAndIncrement();
-                    overallprice.set(overallprice.get() + data.getService_price());
-                    profit.set(profit.get() + data.getService_price());
-                });
-                lblServices.setText(services.get()+"");
-                lblAmount.setText(overallprice.get()+"");
-                lblProfit.setText(profit.get()+"");
-
-            }else{
-                lblServices.setText("0");
-                lblAmount.setText("0.0");
-                lblProfit.setText("0.0");
-            }
-        }));*/
-
         lServices = lblServices;
         lAmount = lblAmount;
         lProfit = lblProfit;
+        cbCustomer.getSelectionModel().select(0);
     }
 
     @FXML void btnAddOnAction(ActionEvent event) {
 
+        if (tblSelected.getList().size()>0){
+            JFXDialogLayout dialogLayout= JDialogPopup.createByType(rootPane,
+                    rootPane.getChildren().get(0),
+                    "Processing. . .",
+                    "Saving Record, please wait. . .", DialogType.INFORM,false);
+            JDialogPopup.showDialog(dialogLayout);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event1 -> {
+                Date dt = new Date(System.currentTimeMillis());
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                String customer = cbCustomer.getSelectionModel().getSelectedIndex()==0?"null":cbCustomer.getSelectionModel().getSelectedItem().split(" - ")[0];
+                tblSelected.getList().forEach(data->{
+                    dbHandler.startConnection();
+                    String sql =String.format("insert into jays_transaction(customer, transaction_amount, transaction_income, transaction_date, transaction_service)" +
+                            " VALUES (%s,%s,%s,'%s',%s);",customer,lblAmount.getText(),lblProfit.getText(), formatter.format(dt),data.getService_id());
+                    dbHandler.execUpdate(sql);
+                    dbHandler.closeConnection();
+                });
+            }),new KeyFrame(Duration.seconds(1)));
+
+            timeline.setOnFinished(event1 -> {
+                resetFields();
+                JDialogPopup.closeDialog(dialogLayout);
+                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                        rootPane.getChildren().get(0),
+                        "Success",
+                        "New Transaction Added",DialogType.SUCCESS));
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
+
+        }else{
+            JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                    rootPane.getChildren().get(0),
+                    "Invalid Process",
+                    "Services cannot be empty", DialogType.ERROR,true));
+        }
     }
 
     @FXML void btnClearOnAction(ActionEvent event) {
-
+        tblSelected.getList().clear();
+        lServices.setText("0");
+        lAmount.setText("0.0");
+        lProfit.setText("0.0");
     }
 
     @FXML void btnSearchOnAction(ActionEvent event) {
@@ -196,5 +218,10 @@ public class JTransaction implements Initializable {
             throwables.printStackTrace();
             dbHandler.closeConnection();
         }
+    }
+
+    private void resetFields(){
+        cbCustomer.getSelectionModel().select(0);
+        tblSelected.getList().clear();
     }
 }

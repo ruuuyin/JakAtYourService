@@ -62,6 +62,7 @@ public class JMain implements Initializable {
     openedSceneMap.put(navCustomer,false);
     openedSceneMap.put(navRecord,false);
     ivDropDown.setImage(App.getImage("j-menu",true));
+    SceneRouter.attachNode(subSceneContainer,"JHome");
   }
 
   @FXML void navAction(ActionEvent event) {
@@ -70,7 +71,7 @@ public class JMain implements Initializable {
   }
 
   @FXML void logoOnClick(MouseEvent event) {
-
+      SceneRouter.attachNode(subSceneContainer,"JHome");
   }
 
   @FXML void menuOnClick(MouseEvent event) {

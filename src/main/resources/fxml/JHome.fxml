@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1432.0" styleClass="rootPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jays.controller.JHome">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="414.0" layoutY="96.0" prefHeight="652.0" prefWidth="597.0" spacing="20.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="755.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <JFXButton fx:id="btnTransaction" maxWidth="1.7976931348623157E308" onAction="#btnOnAction" prefHeight="68.0" prefWidth="578.0" styleClass="buttonImportantOutlined" text="Transaction" />
+                  <JFXButton fx:id="btnService" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" onAction="#btnOnAction" prefHeight="68.0" prefWidth="578.0" styleClass="buttonImportantOutlined" text="Service Registry" />
+                  <JFXButton fx:id="btnCustomer" layoutX="10.0" layoutY="98.0" maxWidth="1.7976931348623157E308" onAction="#btnOnAction" prefHeight="68.0" prefWidth="578.0" styleClass="buttonImportantOutlined" text="Customer Registry" />
+                  <JFXButton fx:id="btnRecord" layoutX="10.0" layoutY="186.0" maxWidth="1.7976931348623157E308" onAction="#btnOnAction" prefHeight="68.0" prefWidth="578.0" styleClass="buttonImportantOutlined" text="Record" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="952.0" layoutY="158.0" prefHeight="652.0" prefWidth="578.0" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <ImageView fitHeight="410.0" fitWidth="407.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                     <image>
+                        <Image url="@../img/j-logo-2.png" />
+                     </image>
+                  </ImageView>
+                  <VBox prefHeight="189.0" prefWidth="578.0">
+                     <children>
+                        <Label fx:id="lblVersion" alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="14.0" prefWidth="578.0" styleClass="inputLabel" text="Version 1.0.0">
+                           <VBox.margin>
+                              <Insets bottom="50.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="6.0" prefWidth="578.0" styleClass="headerLabel" text="Developed by" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="80.0" maxWidth="1.7976931348623157E308" prefHeight="6.0" prefWidth="578.0" styleClass="inputLabel" text="Ralph Royeen A. Lagumen" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="105.0" maxWidth="1.7976931348623157E308" prefHeight="6.0" prefWidth="578.0" styleClass="inputLabel" text="Princess Joy C. Avengoza" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="124.0" maxWidth="1.7976931348623157E308" prefHeight="6.0" prefWidth="578.0" styleClass="inputLabel" text="Hazel Mae Bugais" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="144.0" maxWidth="1.7976931348623157E308" prefHeight="6.0" prefWidth="578.0" styleClass="inputLabel" text="Edmond Jeff Esmalla" />
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="163.0" maxWidth="1.7976931348623157E308" prefHeight="6.0" prefWidth="578.0" styleClass="inputLabel" text="Aaron Jigo Layug" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

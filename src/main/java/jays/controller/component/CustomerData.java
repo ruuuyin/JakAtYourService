@@ -74,4 +74,8 @@ public class CustomerData extends Customer {
         return btn;
     }
 
+    public void resetFullName(){
+        this.fullName = getCustomer_first()+" "+(getCustomer_middle().equals("N/A")?" ":getCustomer_middle())+" "+getCustomer_last();
+    }
+
 }

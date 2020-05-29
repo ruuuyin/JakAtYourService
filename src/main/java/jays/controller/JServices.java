@@ -72,14 +72,12 @@ public class JServices implements Initializable {
     }
 
     @FXML void mngServiceCancelOnAction(ActionEvent event) {
-        if(isAdd()){
             setManageServices(false);
             new InputHandler(igServiceName).getInputField().setText("");
             new InputHandler(igServiceProfit).getInputField().setText("");
             new InputHandler(igServicePrice).getInputField().setText("");
             cbCategorySelector.getSelectionModel().select(-1);
             mngServicesSaveBtn.setText("Save");
-        }
     }
 
     @FXML void mngServicesSaveBtnOnAction(ActionEvent event) {

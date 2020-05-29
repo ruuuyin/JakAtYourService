@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -30,7 +31,7 @@ import java.util.ResourceBundle;
 public class JCustomer implements Initializable {
 
     @FXML private StackPane rootPane;
-    @FXML private TableView<?> tvCustomer;
+    @FXML private TableView<CustomerData> tvCustomer;
     @FXML private TableColumn<CustomerData, String> colCustomer;
     @FXML private TableColumn<CustomerData, String> colContact;
     @FXML private TableColumn<CustomerData, HBox> colAction;
@@ -77,7 +78,8 @@ public class JCustomer implements Initializable {
     }
 
     @FXML void mngCustomerCancelOnAction(ActionEvent event) {
-
+        setFieldsDisable(true,true);
+        resetFields();
     }
 
     @FXML void mngCustomerSaveOnAction(ActionEvent event) {
@@ -109,7 +111,20 @@ public class JCustomer implements Initializable {
                         DialogType.SUCCESS));
                 this.queryAllServices();
             }else{
-
+                dbHandler.startConnection();
+                String sql = String.format("update jays_customer set customer_first='%s',customer_middle='%s',customer_last='%s',customer_phone='%s' where customer_id = %s",
+                        first,(middle.equals("")?"N/A":middle),last,contact,selectedData.getCustomer_id());
+                dbHandler.execUpdate(sql);
+                dbHandler.closeConnection();
+                setFieldsDisable(false,true);
+                resetFields();
+                JDialogPopup.showDialog(JDialogPopup.createByType(rootPane,
+                        rootPane.getChildren().get(0),
+                        "Operation Success",
+                        "Service has been updated",
+                        DialogType.SUCCESS));
+                queryAllServices();
+                selectedData.setCustomer_phone(contact);
             }
 
         }
@@ -118,6 +133,21 @@ public class JCustomer implements Initializable {
 
     @FXML void tfSearchOnKeyRelease(KeyEvent event) {
 
+    }
+
+    @FXML void tvCustomerOnMouseClicked(MouseEvent event) {
+        CustomerData customerData =  tvCustomer.getSelectionModel().getSelectedItem();
+        if (customerData!=null){
+            setFieldsDisable(false,false);
+            selectedData = customerData;
+            inputFirstName.getInputField().setText(customerData.getCustomer_first());
+            inputMiddle.getInputField().setText(customerData.getCustomer_middle().equals("N/A")?"":customerData.getCustomer_middle());
+            inputLast.getInputField().setText(customerData.getCustomer_last());
+            inputContact.getInputField().setText(customerData.getCustomer_phone());
+        }else{
+            setFieldsDisable(false,true);
+            resetFields();
+        }
     }
 
     @Override

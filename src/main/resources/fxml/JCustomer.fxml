@@ -26,7 +26,7 @@
                   <DropShadow color="#00000033" height="15.75" radius="7.6875" width="17.0" />
                </effect>
                <children>
-                  <TableView fx:id="tvCustomer" prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tvCustomer" onMouseClicked="#tvCustomerOnMouseClicked" prefHeight="545.0" prefWidth="890.0" AnchorPane.bottomAnchor="27.399999999999977" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="colCustomer" maxWidth="398.40003204345703" minWidth="398.40003204345703" prefWidth="398.40003204345703" styleClass="center-cell-item" text="CUSTOMER NAME" />
                         <TableColumn fx:id="colContact" minWidth="200.0" prefWidth="279.9999084472656" styleClass="center-cell-item" text="CONTACT NUMBER" />

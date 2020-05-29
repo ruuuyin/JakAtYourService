@@ -386,7 +386,7 @@ Button:hover{
 .table-view .table-row-cell .table-cell{
     -fx-text-fill:-clr-txt-hint;
     -fx-border:none;
-    -fx-padding:15px;
+    /*-fx-padding:15px 0;*/
 }
 
 .table-view .table-row-cell{
@@ -459,13 +459,20 @@ Button:hover{
 
 .chipLabel{
     -fx-font-size:10px;
+    -fx-text-fill:-clr-container;
 }
 
 .chipClose{
     -fx-background-color:-clr-teal-600;
+    -fx-text-fill:-clr-container;
     -fx-font-size:10px;
     -fx-background-radius:20px;
 }
 .chipClose:hover{
     opacity:0.8;
+}
+
+.table-action{
+    -fx-background-radius: 5px;
+    -fx-background-radius: 5px;
 }

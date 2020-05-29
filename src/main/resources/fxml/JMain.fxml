@@ -18,7 +18,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="45.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fitHeight="45.0" fitWidth="46.0" onMouseClicked="#logoOnClick" pickOnBounds="true" preserveRatio="true" smooth="false">
                            <image>
                               <Image url="@../img/j-logo-1.png" />
                            </image>
@@ -54,21 +54,21 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" maxHeight="66.0" minHeight="66.0" prefHeight="66.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="lblUser" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="230.0" styleClass="headerLabel" text="\@Username" HBox.hgrow="ALWAYS">
+                        <Label fx:id="lblUser" alignment="CENTER_RIGHT" onMouseClicked="#changeName" prefHeight="18.0" prefWidth="230.0" styleClass="headerLabel" text="\@Username" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>
                         </Label>
                         <HBox id="avatar" maxHeight="48.0" maxWidth="48.0" prefHeight="48.0" prefWidth="48.0">
                            <children>
-                              <ImageView fx:id="icAvatar" fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                              <ImageView fx:id="icAvatar" fitHeight="49.0" fitWidth="48.0" onMouseClicked="#avatarOnClick" pickOnBounds="true" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@../img/avatars/6.png" />
                                  </image>
                               </ImageView>
                            </children>
                         </HBox>
-                        <ImageView fx:id="ivDropDown" fitHeight="58.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                        <ImageView fx:id="ivDropDown" fitHeight="58.0" fitWidth="46.0" onMouseClicked="#menuOnClick" pickOnBounds="true" preserveRatio="true" smooth="false">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>

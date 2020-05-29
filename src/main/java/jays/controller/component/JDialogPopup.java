@@ -1,5 +1,6 @@
 package jays.controller.component;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.geometry.Insets;
@@ -10,7 +11,10 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import jays.App;
 import jays.utils.Directory;
 
 public class JDialogPopup {
@@ -164,4 +168,20 @@ public class JDialogPopup {
         JFXDialog dialog = (JFXDialog) dialogLayout.getParent().getParent();
         dialog.close();
     }
+
+
+    public static final JFXDialogLayout createContentOnly(StackPane root,Node toBeBlur,String title,boolean closble,Node ... node){
+        dialogLayout= new JFXDialogLayout();
+        dialog = new JFXDialog(root,dialogLayout,JFXDialog.DialogTransition.TOP);
+        dialog.setOverlayClose(closble);
+        dialog.setOnDialogClosed(event -> toBeBlur.setEffect(null));
+        dialog.setOnDialogOpened(event -> toBeBlur.setEffect(blur));
+        Label ttl = new Label(title);
+        ttl.getStyleClass().add("headerLabel");
+        dialogLayout.setHeading(ttl);
+        dialogLayout.setBody(node);
+        return dialogLayout;
+    }
+
+
 }
